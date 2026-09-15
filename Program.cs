@@ -1,0 +1,138 @@
+﻿class GameState
+{
+	Player[] Players { get; set; }
+}
+
+class Player
+{
+	public string Name { get; set; }
+	public int Score { get; set; }
+	public string Color { get; set; }
+	public List<Piece> Pieces { get; set; }
+	public int GetDiceRoll() => Random.Shared.Next(1, 7);
+}
+
+class Piece : IColored
+{
+	public string Color { get; set; }
+}
+
+class Home : IColored
+{
+	public string Color { get; set; }
+}
+class Space : IColored
+{
+	public string Color { get; set; }
+}
+
+interface IColored
+{
+	public string Color { get; set; }
+}
+
+interface ISafe
+{
+	//Do something
+}
+
+class SafeSpace : Space, ISafe
+{
+
+}
+
+class FinishSpace : Space, ISafe
+{
+
+}
+class Program
+{
+	static void Main()
+	{
+		int playerCount = 0;
+		Console.WriteLine("Välkommen till Markus med knuff");
+		Console.WriteLine("===============================");
+		while (true)
+		{
+			playerCount = MInput.GetInputAsInt("Välj antal spelare 2-4: ");
+			if (playerCount < 2 || playerCount > 4)
+			{
+				Console.WriteLine("Välj mellan 2 och 4 spelare!");
+				continue;
+			}
+			Console.WriteLine($"Antal valda spelare: {playerCount}");
+			break;
+		}
+
+		List<Player> players = new();
+		List<string> colorList = ["red", "blue", "green", "yellow"];
+
+		for (int i = 0; i < playerCount; i++)
+		{
+			Player p = new();
+			p.Name = "Player " + (i + 1);
+
+
+			while (true)
+			{
+				Console.WriteLine("Tillgängliga färger");
+				int colorCount = 1;
+				foreach (string c in colorList)
+				{
+					Console.WriteLine($"{colorCount++}. {c}");
+				}
+				string color = MInput.GetInput("Välj en färg: ");
+				if (!colorList.Contains(color, StringComparer.OrdinalIgnoreCase))
+				{
+					Console.WriteLine("Ej ett giltigt val av färg.");
+				}
+				else
+				{
+					p.Color = colorList[colorList.IndexOf(color.ToLower())];
+					colorList.Remove(p.Color);
+					players.Add(p);
+					break;
+				}
+			}
+		}
+
+		foreach (Player p in players)
+		{
+			Console.Write($"{p.Name} color: ");
+
+			switch (p.Color)
+			{
+				case "red":
+					Console.ForegroundColor = ConsoleColor.Red;
+					break;
+				case "blue":
+					Console.ForegroundColor = ConsoleColor.Blue;
+					break;
+				case "green":
+					Console.ForegroundColor = ConsoleColor.Green;
+					break;
+				case "yellow":
+					Console.ForegroundColor = ConsoleColor.Yellow;
+					break;
+			}
+
+			Console.Write(p.Color);
+			Console.ResetColor();
+			Console.WriteLine();
+		}
+
+		int rows = 13;
+		int cols = 13;
+		string[,] board = new string[rows, cols];
+
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < cols; j++)
+			{
+				board[i, j] = "x  ";
+				Console.Write(board[i, j]);
+			}
+			Console.WriteLine();
+		}
+	}
+}
