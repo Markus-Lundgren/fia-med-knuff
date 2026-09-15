@@ -43,7 +43,6 @@ interface ISafe
 {
 	//Do something
 }
-
 class SafeSpace : Space, ISafe
 {
 
