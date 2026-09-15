@@ -12,6 +12,14 @@ class Player
 	public int GetDiceRoll() => Random.Shared.Next(1, 7);
 }
 
+class Board
+{
+	public void CreateBoard()
+	{
+
+	}
+}
+
 class Piece : IColored
 {
 	public string Color { get; set; }
@@ -121,13 +129,12 @@ class Program
 			Console.WriteLine();
 		}
 
-		int rows = 13;
-		int cols = 13;
-		string[,] board = new string[rows, cols];
+		int boardsize = 15;
+		string[,] board = new string[boardsize, boardsize];
 
-		for (int i = 0; i < rows; i++)
+		for (int i = 0; i < boardsize; i++)
 		{
-			for (int j = 0; j < cols; j++)
+			for (int j = 0; j < boardsize; j++)
 			{
 				board[i, j] = "x  ";
 				Console.Write(board[i, j]);
