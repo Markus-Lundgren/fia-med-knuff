@@ -172,6 +172,15 @@ class Program
 			Console.WriteLine($"{p.Name}'s tur!");
 			Console.WriteLine("Slå en tärning!");
 			Console.WriteLine("Tryck valfri knapp!");
+
+			foreach (Player x in gS.Players)
+			{
+				if (x.DiceRoll > 0)
+				{
+					Console.WriteLine($"{x.Name} fick: {x.DiceRoll}");
+				}
+			}
+
 			Console.ReadKey(true);
 			Console.CursorVisible = false;
 
