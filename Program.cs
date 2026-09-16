@@ -46,8 +46,10 @@ class GameState
 		for (int i = 0; i < count; i++)
 		{
 			Player p = new();
-			p.Name = MInput.GetInput("Välj ett namn: ");
+			b.DrawBoard();
+			PlayerInfo();
 			p.Id = i + 1;
+			p.Name = MInput.GetInput($"Spelare {p.Id}, välj ett namn: ");
 
 			while (true)
 			{
@@ -62,7 +64,7 @@ class GameState
 					colorMatch.Add(colorCount, c);
 					Console.WriteLine($"{colorCount++}. {c}");
 				}
-				string color = MInput.GetInput("Välj en färg: ");
+				string color = MInput.GetInput($"Spelare {p.Id}, välj en färg: ");
 
 				if (int.TryParse(color, out int num))
 				{
@@ -123,13 +125,15 @@ class GameState
 			{
 				Console.WriteLine();
 				Console.WriteLine("Alla spelare har kastat sin tärning!");
+				Console.WriteLine("Tryck på valfri knapp för att gå vidare!");
+				Console.ReadKey(true);
 			}
-			else
-			{
-				Console.WriteLine();
-				Console.WriteLine("Tryck på valfri knapp för nästa spelare");
-			}
-			Console.ReadKey(true);
+			// else
+			// {
+			// 	Console.WriteLine();
+			// 	Console.WriteLine("Tryck på valfri knapp för nästa spelare");
+			// 	Console.ReadKey(true);
+			// }
 		}
 
 		b.DrawBoard();
@@ -309,14 +313,25 @@ class Program
 
 		int playerCount = 0;
 
-		Console.WriteLine("=Välkommen till Markus med knuff=");
-		Console.WriteLine("=================================");
 		while (true)
 		{
-			playerCount = MInput.GetInputAsInt("Välj antal spelare 2-4: ");
+			Console.Clear();
+			Console.WriteLine("=Välkommen till Markus med knuff=");
+			Console.WriteLine("=================================");
+			Console.Write("Välj antal spelare 2-4: ");
+			string input = Console.ReadLine();
+			if (!int.TryParse(input, out playerCount))
+			{
+				Console.WriteLine("Du måste skriva ett NUMMER mellan 2 och 4");
+				Console.WriteLine("Tryck valfri knapp för att gå vidare");
+				Console.ReadKey(true);
+				continue;
+			}
 			if (playerCount < 2 || playerCount > 4)
 			{
 				Console.WriteLine("Välj mellan 2 och 4 spelare!");
+				Console.WriteLine("Tryck valfri knapp för att gå vidare");
+				Console.ReadKey(true);
 				continue;
 			}
 			Console.WriteLine($"Antal valda spelare: {playerCount}");
