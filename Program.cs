@@ -16,7 +16,18 @@ class Board
 {
 	public void CreateBoard()
 	{
+		int boardsize = 15;
+		string[,] board = new string[boardsize, boardsize];
 
+		for (int i = 0; i < boardsize; i++)
+		{
+			for (int j = 0; j < boardsize; j++)
+			{
+				board[i, j] = "x ";
+				Console.Write(board[i, j]);
+			}
+			Console.WriteLine();
+		}
 	}
 }
 
@@ -56,6 +67,7 @@ class Program
 {
 	static void Main()
 	{
+		Board board = new();
 		int playerCount = 0;
 		Console.WriteLine("Välkommen till Markus med knuff");
 		Console.WriteLine("===============================");
@@ -128,17 +140,6 @@ class Program
 			Console.WriteLine();
 		}
 
-		int boardsize = 15;
-		string[,] board = new string[boardsize, boardsize];
-
-		for (int i = 0; i < boardsize; i++)
-		{
-			for (int j = 0; j < boardsize; j++)
-			{
-				board[i, j] = "x  ";
-				Console.Write(board[i, j]);
-			}
-			Console.WriteLine();
-		}
+		board.CreateBoard();
 	}
 }
