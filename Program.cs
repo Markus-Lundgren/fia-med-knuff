@@ -128,6 +128,13 @@ class Board
 		}
 		//Console.WriteLine(Frame.ToString());
 	}
+
+	public void DrawBoard(GameState gS)
+	{
+		Console.Clear();
+		Console.WriteLine(Frame.ToString());
+		gS.PlayerInfo();
+	}
 }
 
 class Piece : IColored
@@ -192,10 +199,9 @@ class Program
 
 		foreach (Player p in gS.Players)
 		{
-			Console.Clear();
-			Console.WriteLine(board.Frame.ToString());
-			gS.PlayerInfo();
+			board.DrawBoard(gS);
 			Console.WriteLine("Slå en tärning om vem som börjar!");
+			Console.WriteLine();
 			foreach (Player x in gS.Players)
 			{
 				if (x.DiceRoll > 0)
@@ -205,12 +211,22 @@ class Program
 			}
 			Console.WriteLine($"{p.Name}'s tur!");
 			p.RollDice();
+
+			if (p == gS.Players.Last())
+			{
+				Console.WriteLine();
+				Console.WriteLine("Alla spelare har kastat sin tärning!");
+			}
+			else
+			{
+				Console.WriteLine();
+				Console.WriteLine("Tryck på valfri knapp för nästa spelare");
+			}
 			Console.ReadKey(true);
 		}
 
-		Console.Clear();
-		Console.WriteLine(board.Frame.ToString());
-		gS.PlayerInfo();
+		board.DrawBoard(gS);
+
 		foreach (Player x in gS.Players)
 		{
 			if (x.DiceRoll > 0)
