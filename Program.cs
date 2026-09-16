@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Drawing;
+using System.Text;
 
 class GameState
 {
@@ -38,26 +39,51 @@ class GameState
 	public void AddPlayers(Board b, int count)
 	{
 		List<string> colorList = ["red", "blue", "green", "yellow"];
+		Dictionary<int, string> colorMatch = new();
 
 		for (int i = 0; i < count; i++)
 		{
 			Player p = new();
-			b.DrawBoard();
-			PlayerInfo();
 			p.Name = "Player " + (i + 1);
 
 			while (true)
 			{
+				b.DrawBoard();
+				PlayerInfo();
 				Console.WriteLine("Tillgängliga färger");
 				int colorCount = 1;
+				colorMatch.Clear();
+
 				foreach (string c in colorList)
 				{
+					colorMatch.Add(colorCount, c);
 					Console.WriteLine($"{colorCount++}. {c}");
 				}
 				string color = MInput.GetInput("Välj en färg: ");
-				if (!colorList.Contains(color, StringComparer.OrdinalIgnoreCase))
+
+				if (int.TryParse(color, out int num))
+				{
+					if (num < 1 || num > colorCount)
+					{
+						Console.WriteLine("Ej ett giltigt val");
+						Console.WriteLine("Tryck valfri knapp för att fortsätta");
+						Console.ReadKey(true);
+						continue;
+					}
+					else
+					{
+						p.Color = colorList[colorList.IndexOf(colorMatch[num].ToLower())];
+						colorList.Remove(p.Color);
+						Players.Add(p);
+						break;
+					}
+				}
+				else if (!colorList.Contains(color, StringComparer.OrdinalIgnoreCase))
 				{
 					Console.WriteLine("Ej ett giltigt val av färg.");
+					Console.WriteLine("Tryck valfri knapp för att fortsätta");
+					Console.ReadKey(true);
+					continue;
 				}
 				else
 				{
