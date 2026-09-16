@@ -73,9 +73,16 @@ class GameState
 class Player
 {
 	public string? Name { get; set; }
+
+	public int DiceRoll { get; set; }
 	public int Score { get; set; }
 	public string? Color { get; set; }
 	public List<Piece> Pieces { get; set; }
+
+	public Player()
+	{
+
+	}
 	public int GetDiceRoll() => Random.Shared.Next(1, 7);
 }
 
@@ -159,11 +166,14 @@ class Program
 
 		board.CreateBoard();
 
+		Player[] playerOrder = new Player[playerCount];
+
 		foreach (Player p in gS.Players)
 		{
 			Console.Clear();
 			Console.WriteLine(board.Frame.ToString());
 			gS.PlayerInfo();
+			Console.WriteLine("Slå en tärning om vem som börjar!");
 			Console.WriteLine($"{p.Name}'s tur!");
 			Console.WriteLine("Slå en tärning!");
 			Console.WriteLine("Tryck valfri knapp!");
