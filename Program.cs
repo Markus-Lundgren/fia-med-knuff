@@ -79,6 +79,33 @@ class Player
 	public string? Color { get; set; }
 	public List<Piece> Pieces { get; set; }
 	public int GetDiceRoll() => Random.Shared.Next(1, 7);
+	public void RollDice()
+	{
+		Console.WriteLine("Slå en tärning!");
+		Console.Write("Tryck valfri knapp!");
+		int currentCursor = Console.CursorTop;
+		Console.ReadKey(true);
+		Console.SetCursorPosition(0, currentCursor);
+		Console.Write("                    ");
+		Console.CursorVisible = false;
+
+		int diceRoll = 0;
+		currentCursor = Console.CursorTop;
+
+		for (int i = 0; i < 7; i++)
+		{
+			Console.SetCursorPosition(0, currentCursor);
+
+			diceRoll = GetDiceRoll();
+			Console.Write($"Tärning: {diceRoll}");
+
+			Thread.Sleep(250);
+		}
+		DiceRoll = diceRoll;
+		Console.SetCursorPosition(0, currentCursor);
+		Console.Write($"Du fick: {diceRoll}!");
+		Console.CursorVisible = true;
+	}
 }
 
 class Board
@@ -177,29 +204,20 @@ class Program
 				}
 			}
 			Console.WriteLine($"{p.Name}'s tur!");
-			Console.WriteLine("Slå en tärning!");
-			Console.WriteLine("Tryck valfri knapp!");
-
-			Console.ReadKey(true);
-			Console.CursorVisible = false;
-
-			int diceRoll = 0;
-			int currentCursor = Console.CursorTop;
-
-			for (int i = 0; i < 7; i++)
-			{
-				Console.SetCursorPosition(0, currentCursor);
-
-				diceRoll = p.GetDiceRoll();
-				Console.Write($"Tärning: {diceRoll}");
-
-				Thread.Sleep(250);
-			}
-			p.DiceRoll = diceRoll;
-			Console.SetCursorPosition(0, currentCursor);
-			Console.Write($"Du fick: {diceRoll}! Tryck på valfri knapp för nästa spelare.");
-			Console.CursorVisible = true;
+			p.RollDice();
 			Console.ReadKey(true);
 		}
+
+		Console.Clear();
+		Console.WriteLine(board.Frame.ToString());
+		gS.PlayerInfo();
+		foreach (Player x in gS.Players)
+		{
+			if (x.DiceRoll > 0)
+			{
+				Console.WriteLine($"{x.Name} fick: {x.DiceRoll}");
+			}
+		}
+
 	}
 }
