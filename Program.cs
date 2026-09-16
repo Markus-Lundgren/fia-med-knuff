@@ -169,10 +169,6 @@ class Program
 			Console.WriteLine(board.Frame.ToString());
 			gS.PlayerInfo();
 			Console.WriteLine("Slå en tärning om vem som börjar!");
-			Console.WriteLine($"{p.Name}'s tur!");
-			Console.WriteLine("Slå en tärning!");
-			Console.WriteLine("Tryck valfri knapp!");
-
 			foreach (Player x in gS.Players)
 			{
 				if (x.DiceRoll > 0)
@@ -180,6 +176,9 @@ class Program
 					Console.WriteLine($"{x.Name} fick: {x.DiceRoll}");
 				}
 			}
+			Console.WriteLine($"{p.Name}'s tur!");
+			Console.WriteLine("Slå en tärning!");
+			Console.WriteLine("Tryck valfri knapp!");
 
 			Console.ReadKey(true);
 			Console.CursorVisible = false;
