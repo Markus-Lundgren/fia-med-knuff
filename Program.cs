@@ -3,9 +3,11 @@ using System.Text;
 
 class GameState
 {
-	public List<Player> Players { get; set; } = new();
+	public List<Player> Players = new();
 
 	public StringBuilder PlayerScore = new();
+
+	public List<Player> PlayerOrder = new();
 
 	public void PlayerInfo()
 	{
@@ -95,12 +97,80 @@ class GameState
 			}
 		}
 	}
+
+	public void SetStartOrder(Board b, int playerCount)
+	{
+		Player[] playerOrder = new Player[playerCount];
+
+		foreach (Player p in Players)
+		{
+			b.DrawBoard();
+			PlayerInfo();
+			Console.WriteLine("Slå en tärning om vem som börjar!");
+			Console.WriteLine();
+			foreach (Player x in Players)
+			{
+				if (x.DiceRoll > 0)
+				{
+					Console.WriteLine($"{x.Name} fick: {x.DiceRoll}");
+				}
+			}
+			Console.WriteLine($"{p.Name}'s tur!");
+			p.RollDice();
+
+			if (p == Players.Last())
+			{
+				Console.WriteLine();
+				Console.WriteLine("Alla spelare har kastat sin tärning!");
+			}
+			else
+			{
+				Console.WriteLine();
+				Console.WriteLine("Tryck på valfri knapp för nästa spelare");
+			}
+			Console.ReadKey(true);
+		}
+
+		b.DrawBoard();
+		PlayerInfo();
+		Player[] playerArray = new Player[playerCount];
+		int index = 0;
+		foreach (Player p in Players)
+		{
+			//playerArray[index++] = p;
+			Console.WriteLine($"{p.Name} fick: {p.DiceRoll}");
+		}
+	}
+
+	private void SetOrder()
+	{
+		List<Player> tempOrder = new();
+		var groupPlayerList = Players.GroupBy(p => p.DiceRoll).OrderByDescending(g => g.Key);
+
+		foreach (var g in groupPlayerList)
+		{
+			List<Player> playerTie = g.ToList();
+
+			if (playerTie.Count == 1)
+			{
+				tempOrder.Add(playerTie[0]);
+			}
+			else
+			{
+				foreach (Player p in g)
+				{
+					p.RollDice();
+				}
+
+			}
+		}
+	}
 }
 
 class Player
 {
 	public string? Name { get; set; }
-
+	public int Id { get; set; }
 	public int DiceRoll = 0;
 	public int Score { get; set; }
 	public string? Color { get; set; }
@@ -247,50 +317,6 @@ class Program
 		}
 
 		gS.AddPlayers(board, playerCount);
-
-		Player[] playerOrder = new Player[playerCount];
-
-		foreach (Player p in gS.Players)
-		{
-			board.DrawBoard();
-			gS.PlayerInfo();
-			Console.WriteLine("Slå en tärning om vem som börjar!");
-			Console.WriteLine();
-			foreach (Player x in gS.Players)
-			{
-				if (x.DiceRoll > 0)
-				{
-					Console.WriteLine($"{x.Name} fick: {x.DiceRoll}");
-				}
-			}
-			Console.WriteLine($"{p.Name}'s tur!");
-			p.RollDice();
-
-			if (p == gS.Players.Last())
-			{
-				Console.WriteLine();
-				Console.WriteLine("Alla spelare har kastat sin tärning!");
-			}
-			else
-			{
-				Console.WriteLine();
-				Console.WriteLine("Tryck på valfri knapp för nästa spelare");
-			}
-			Console.ReadKey(true);
-		}
-
-		board.DrawBoard();
-		gS.PlayerInfo();
-
-		foreach (Player x in gS.Players)
-		{
-			if (x.DiceRoll > 0)
-			{
-				Console.WriteLine($"{x.Name} fick: {x.DiceRoll}");
-			}
-		}
-
-
-
+		gS.SetStartOrder(board, playerCount);
 	}
 }
