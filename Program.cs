@@ -74,15 +74,10 @@ class Player
 {
 	public string? Name { get; set; }
 
-	public int DiceRoll { get; set; }
+	public int DiceRoll = 0;
 	public int Score { get; set; }
 	public string? Color { get; set; }
 	public List<Piece> Pieces { get; set; }
-
-	public Player()
-	{
-
-	}
 	public int GetDiceRoll() => Random.Shared.Next(1, 7);
 }
 
@@ -192,6 +187,7 @@ class Program
 
 				Thread.Sleep(250);
 			}
+			p.DiceRoll = diceRoll;
 			Console.SetCursorPosition(0, currentCursor);
 			Console.Write($"Du fick: {diceRoll}! Tryck på valfri knapp för nästa spelare.");
 			Console.CursorVisible = true;
