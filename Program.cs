@@ -134,18 +134,21 @@ class GameState
 		b.DrawBoard();
 		PlayerInfo();
 		Player[] playerArray = new Player[playerCount];
-		int index = 0;
+		Players = SetOrder(Players);
+		int order = 1;
+		Console.WriteLine("Spel ordning");
 		foreach (Player p in Players)
 		{
-			//playerArray[index++] = p;
-			Console.WriteLine($"{p.Name} fick: {p.DiceRoll}");
+			Console.WriteLine($"{order++}. {p.Name}");
 		}
+
+
 	}
 
-	private void SetOrder()
+	private List<Player> SetOrder(List<Player> orderingList)
 	{
 		List<Player> tempOrder = new();
-		var groupPlayerList = Players.GroupBy(p => p.DiceRoll).OrderByDescending(g => g.Key);
+		var groupPlayerList = orderingList.GroupBy(p => p.DiceRoll).OrderByDescending(g => g.Key);
 
 		foreach (var g in groupPlayerList)
 		{
@@ -159,11 +162,14 @@ class GameState
 			{
 				foreach (Player p in g)
 				{
+					Console.WriteLine($"{p.Name} kasta en till tärning!");
 					p.RollDice();
 				}
-
+				List<Player> temp = SetOrder(playerTie);
+				tempOrder.AddRange(temp);
 			}
 		}
+		return tempOrder;
 	}
 }
 
@@ -200,7 +206,7 @@ class Player
 		}
 		DiceRoll = diceRoll;
 		Console.SetCursorPosition(0, currentCursor);
-		Console.Write($"Du fick: {diceRoll}!");
+		Console.WriteLine($"Du fick: {diceRoll}!");
 		Console.CursorVisible = true;
 	}
 }
