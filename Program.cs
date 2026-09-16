@@ -1,13 +1,47 @@
 ﻿class GameState
 {
-	Player[] Players { get; set; }
+	public List<Player> Players { get; set; } = new();
+
+	public void AddPlayers(int count)
+	{
+		List<string> colorList = ["red", "blue", "green", "yellow"];
+
+		for (int i = 0; i < count; i++)
+		{
+			Player p = new();
+			p.Name = "Player " + (i + 1);
+
+
+			while (true)
+			{
+				Console.WriteLine("Tillgängliga färger");
+				int colorCount = 1;
+				foreach (string c in colorList)
+				{
+					Console.WriteLine($"{colorCount++}. {c}");
+				}
+				string color = MInput.GetInput("Välj en färg: ");
+				if (!colorList.Contains(color, StringComparer.OrdinalIgnoreCase))
+				{
+					Console.WriteLine("Ej ett giltigt val av färg.");
+				}
+				else
+				{
+					p.Color = colorList[colorList.IndexOf(color.ToLower())];
+					colorList.Remove(p.Color);
+					Players.Add(p);
+					break;
+				}
+			}
+		}
+	}
 }
 
 class Player
 {
-	public string Name { get; set; }
+	public string? Name { get; set; }
 	public int Score { get; set; }
-	public string Color { get; set; }
+	public string? Color { get; set; }
 	public List<Piece> Pieces { get; set; }
 	public int GetDiceRoll() => Random.Shared.Next(1, 7);
 }
@@ -67,6 +101,7 @@ class Program
 {
 	static void Main()
 	{
+		GameState gS = new();
 		Board board = new();
 		int playerCount = 0;
 		Console.WriteLine("Välkommen till Markus med knuff");
@@ -83,39 +118,9 @@ class Program
 			break;
 		}
 
-		List<Player> players = new();
-		List<string> colorList = ["red", "blue", "green", "yellow"];
+		gS.AddPlayers(playerCount);
 
-		for (int i = 0; i < playerCount; i++)
-		{
-			Player p = new();
-			p.Name = "Player " + (i + 1);
-
-
-			while (true)
-			{
-				Console.WriteLine("Tillgängliga färger");
-				int colorCount = 1;
-				foreach (string c in colorList)
-				{
-					Console.WriteLine($"{colorCount++}. {c}");
-				}
-				string color = MInput.GetInput("Välj en färg: ");
-				if (!colorList.Contains(color, StringComparer.OrdinalIgnoreCase))
-				{
-					Console.WriteLine("Ej ett giltigt val av färg.");
-				}
-				else
-				{
-					p.Color = colorList[colorList.IndexOf(color.ToLower())];
-					colorList.Remove(p.Color);
-					players.Add(p);
-					break;
-				}
-			}
-		}
-
-		foreach (Player p in players)
+		foreach (Player p in gS.Players)
 		{
 			Console.Write($"{p.Name} color: ");
 
