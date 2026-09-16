@@ -11,7 +11,6 @@ class GameState
 
 	public void PlayerInfo()
 	{
-		//PlayerInfo.Clear();
 		foreach (Player p in Players)
 		{
 			Console.Write($"{p.Name} color: ");
@@ -118,7 +117,7 @@ class GameState
 					Console.WriteLine($"{x.Name} fick: {x.DiceRoll}");
 				}
 			}
-			Console.WriteLine($"{p.Name}'s tur!");
+			Console.WriteLine($"{p.Name} tur!");
 			p.RollDice();
 
 			if (p == Players.Last())
@@ -128,12 +127,6 @@ class GameState
 				Console.WriteLine("Tryck på valfri knapp för att gå vidare!");
 				Console.ReadKey(true);
 			}
-			// else
-			// {
-			// 	Console.WriteLine();
-			// 	Console.WriteLine("Tryck på valfri knapp för nästa spelare");
-			// 	Console.ReadKey(true);
-			// }
 		}
 
 		b.DrawBoard();
@@ -146,8 +139,6 @@ class GameState
 		{
 			Console.WriteLine($"{order++}. {p.Name}");
 		}
-
-
 	}
 
 	private List<Player> SetOrder(List<Player> orderingList)
