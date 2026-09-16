@@ -1,7 +1,40 @@
-﻿class GameState
+﻿using System.Text;
+
+class GameState
 {
 	public List<Player> Players { get; set; } = new();
 
+	public StringBuilder PlayerScore = new();
+
+	public void PlayerInfo()
+	{
+		//PlayerInfo.Clear();
+		foreach (Player p in Players)
+		{
+			Console.Write($"{p.Name} color: ");
+
+			switch (p.Color)
+			{
+				case "red":
+					Console.ForegroundColor = ConsoleColor.Red;
+					break;
+				case "blue":
+					Console.ForegroundColor = ConsoleColor.Blue;
+					break;
+				case "green":
+					Console.ForegroundColor = ConsoleColor.Green;
+					break;
+				case "yellow":
+					Console.ForegroundColor = ConsoleColor.Yellow;
+					break;
+			}
+
+			Console.Write(p.Color);
+			Console.ResetColor();
+			Console.WriteLine();
+		}
+
+	}
 	public void AddPlayers(int count)
 	{
 		List<string> colorList = ["red", "blue", "green", "yellow"];
@@ -48,20 +81,23 @@ class Player
 
 class Board
 {
+	public StringBuilder Frame = new();
 	public void CreateBoard()
 	{
 		int boardsize = 15;
-		string[,] board = new string[boardsize, boardsize];
+		Frame.Clear();
+		//string[,] board = new string[boardsize, boardsize];
 
 		for (int i = 0; i < boardsize; i++)
 		{
 			for (int j = 0; j < boardsize; j++)
 			{
-				board[i, j] = "x ";
-				Console.Write(board[i, j]);
+				//board[i, j] = "x ";
+				Frame.Append("x ");
 			}
-			Console.WriteLine();
+			Frame.AppendLine();
 		}
+		//Console.WriteLine(Frame.ToString());
 	}
 }
 
@@ -101,6 +137,7 @@ class Program
 {
 	static void Main()
 	{
+		Console.Clear();
 		GameState gS = new();
 		Board board = new();
 		int playerCount = 0;
@@ -120,31 +157,35 @@ class Program
 
 		gS.AddPlayers(playerCount);
 
+		board.CreateBoard();
+
 		foreach (Player p in gS.Players)
 		{
-			Console.Write($"{p.Name} color: ");
+			Console.Clear();
+			Console.WriteLine(board.Frame.ToString());
+			gS.PlayerInfo();
+			Console.WriteLine($"{p.Name}'s tur!");
+			Console.WriteLine("Slå en tärning!");
+			Console.WriteLine("Tryck valfri knapp!");
+			Console.ReadKey(true);
+			Console.CursorVisible = false;
 
-			switch (p.Color)
+			int diceRoll = 0;
+			int currentCursor = Console.CursorTop;
+
+			for (int i = 0; i < 7; i++)
 			{
-				case "red":
-					Console.ForegroundColor = ConsoleColor.Red;
-					break;
-				case "blue":
-					Console.ForegroundColor = ConsoleColor.Blue;
-					break;
-				case "green":
-					Console.ForegroundColor = ConsoleColor.Green;
-					break;
-				case "yellow":
-					Console.ForegroundColor = ConsoleColor.Yellow;
-					break;
+				Console.SetCursorPosition(0, currentCursor);
+
+				diceRoll = p.GetDiceRoll();
+				Console.Write($"Tärning: {diceRoll}");
+
+				Thread.Sleep(250);
 			}
-
-			Console.Write(p.Color);
-			Console.ResetColor();
-			Console.WriteLine();
+			Console.SetCursorPosition(0, currentCursor);
+			Console.Write($"Du fick: {diceRoll}! Tryck på valfri knapp för nästa spelare.");
+			Console.CursorVisible = true;
+			Console.ReadKey(true);
 		}
-
-		board.CreateBoard();
 	}
 }
