@@ -46,7 +46,8 @@ class GameState
 		for (int i = 0; i < count; i++)
 		{
 			Player p = new();
-			p.Name = "Player " + (i + 1);
+			p.Name = MInput.GetInput("Välj ett namn: ");
+			p.Id = i + 1;
 
 			while (true)
 			{
