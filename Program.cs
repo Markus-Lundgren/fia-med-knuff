@@ -35,15 +35,16 @@ class GameState
 		}
 
 	}
-	public void AddPlayers(int count)
+	public void AddPlayers(Board b, int count)
 	{
 		List<string> colorList = ["red", "blue", "green", "yellow"];
 
 		for (int i = 0; i < count; i++)
 		{
 			Player p = new();
+			b.DrawBoard();
+			PlayerInfo();
 			p.Name = "Player " + (i + 1);
-
 
 			while (true)
 			{
@@ -77,7 +78,7 @@ class Player
 	public int DiceRoll = 0;
 	public int Score { get; set; }
 	public string? Color { get; set; }
-	public List<Piece> Pieces { get; set; }
+	public List<Piece> Pieces = new();
 	public int GetDiceRoll() => Random.Shared.Next(1, 7);
 	public void RollDice()
 	{
@@ -126,20 +127,45 @@ class Board
 			}
 			Frame.AppendLine();
 		}
-		//Console.WriteLine(Frame.ToString());
 	}
 
-	public void DrawBoard(GameState gS)
+	public void DrawBoard()
 	{
 		Console.Clear();
+		Console.WriteLine("\x1b[3J");
+		Console.Clear();
+		Console.WriteLine("========Markus med knuff========");
+		Console.WriteLine("================================");
+		Console.WriteLine();
 		Console.WriteLine(Frame.ToString());
-		gS.PlayerInfo();
 	}
 }
 
 class Piece : IColored
 {
 	public string Color { get; set; }
+	public int Id { get; set; }
+
+	public void DrawPiece()
+	{
+		switch (Color)
+		{
+			case "red":
+				Console.ForegroundColor = ConsoleColor.Red;
+				break;
+			case "blue":
+				Console.ForegroundColor = ConsoleColor.Blue;
+				break;
+			case "green":
+				Console.ForegroundColor = ConsoleColor.Green;
+				break;
+			case "yellow":
+				Console.ForegroundColor = ConsoleColor.Yellow;
+				break;
+		}
+		Console.ResetColor();
+		Console.WriteLine();
+	}
 }
 
 class Home : IColored
@@ -176,9 +202,12 @@ class Program
 		Console.Clear();
 		GameState gS = new();
 		Board board = new();
+		board.CreateBoard();
+
 		int playerCount = 0;
-		Console.WriteLine("Välkommen till Markus med knuff");
-		Console.WriteLine("===============================");
+
+		Console.WriteLine("=Välkommen till Markus med knuff=");
+		Console.WriteLine("=================================");
 		while (true)
 		{
 			playerCount = MInput.GetInputAsInt("Välj antal spelare 2-4: ");
@@ -191,15 +220,14 @@ class Program
 			break;
 		}
 
-		gS.AddPlayers(playerCount);
-
-		board.CreateBoard();
+		gS.AddPlayers(board, playerCount);
 
 		Player[] playerOrder = new Player[playerCount];
 
 		foreach (Player p in gS.Players)
 		{
-			board.DrawBoard(gS);
+			board.DrawBoard();
+			gS.PlayerInfo();
 			Console.WriteLine("Slå en tärning om vem som börjar!");
 			Console.WriteLine();
 			foreach (Player x in gS.Players)
@@ -225,7 +253,8 @@ class Program
 			Console.ReadKey(true);
 		}
 
-		board.DrawBoard(gS);
+		board.DrawBoard();
+		gS.PlayerInfo();
 
 		foreach (Player x in gS.Players)
 		{
@@ -234,6 +263,8 @@ class Program
 				Console.WriteLine($"{x.Name} fick: {x.DiceRoll}");
 			}
 		}
+
+
 
 	}
 }
