@@ -74,26 +74,26 @@ class GameState
 					{
 						p.Color = colorList[colorList.IndexOf(colorMatch[num].ToLower())];
 						colorList.Remove(p.Color);
+						p.AddPieces(p.Color);
 						Players.Add(p);
 						break;
 					}
 				}
-				else if (!colorList.Contains(color, StringComparer.OrdinalIgnoreCase))
+
+				if (!colorList.Contains(color, StringComparer.OrdinalIgnoreCase))
 				{
 					Console.WriteLine("Ej ett giltigt val av färg.");
 					Console.WriteLine("Tryck valfri knapp för att fortsätta");
 					Console.ReadKey(true);
 					continue;
 				}
-				else
-				{
-					p.Color = colorList[colorList.IndexOf(color.ToLower())];
-					colorList.Remove(p.Color);
-					p.AddPieces(p.Color);
-					Players.Add(p);
-					break;
-				}
+				p.Color = colorList[colorList.IndexOf(color.ToLower())];
+				colorList.Remove(p.Color);
+				p.AddPieces(p.Color);
+				Players.Add(p);
+				break;
 			}
+			SetupGame();
 		}
 	}
 	public void SetStartOrder(Board b, int playerCount)
@@ -266,10 +266,9 @@ class GameState
 				}
 
 				piece.Coords = tmp;
-
-				GameBoard.Tiles[piece.Coords.Y, piece.Coords.X]?.Pieces.Add(piece);
+				GameBoard.Tiles[piece.Coords.Y, piece.Coords.X].Pieces.Add(piece);
 				Console.SetCursorPosition(2 + (piece.Coords.X * 2), GameBoard.BoardTop + piece.Coords.Y);
-				GameBoard.Tiles[piece.Coords.Y, piece.Coords.X]?.DisplayTile();
+				GameBoard.Tiles[piece.Coords.Y, piece.Coords.X].DisplayTile();
 			}
 		}
 	}

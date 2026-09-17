@@ -6,7 +6,6 @@ class Tile
 	public int X { get; set; }
 	public int Y { get; set; }
 	public bool Special = false;
-
 	public List<Piece> Pieces = new();
 
 	public Tile(int y, int x, string id, string nextId, string color = "NONE", bool special = false)

@@ -5,13 +5,12 @@ class Player
 	public int DiceRoll = 0;
 	public int Score { get; set; }
 	public string? Color { get; set; }
-	public List<Piece> Pieces = new();
+	public List<Piece> Pieces;
 
 	public Player()
 	{
-
+		Pieces = new();
 	}
-
 	public void AddPieces(string color)
 	{
 		for (int i = 0; i < 4; i++)
