@@ -1,6 +1,3 @@
-record TileHolder(int Id, string Color, int NextId, int SpecialNExtId);
-
-
 class Tile
 {
 	public string Color = "NONE";
