@@ -165,4 +165,22 @@ class GameState
 		}
 		return tempOrder;
 	}
+
+	private void ShowGame()
+	{
+		GameBoard.DrawBoard();
+		PlayerInfo();
+	}
+	public void Play()
+	{
+		while (true)
+		{
+			foreach (Player p in Players)
+			{
+				Console.Clear();
+				ShowGame();
+				Console.WriteLine("Dags att spela!");
+			}
+		}
+	}
 }
