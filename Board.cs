@@ -24,54 +24,19 @@ class Board
 		{ new(14,0,"homeYellow","","darkyellow"), new(14,1,"homeYellow","","darkyellow"), new(14,2,"homeYellow","","darkyellow"), new(14,3,"homeYellow","","darkyellow"), null, null, new(14,6,"enterYellow","tile30","yellow"), new(14,7,"tile28","enterYellow"), new(14,8,"tile27","tile28"), null, null, new(14,11,"homeGreen","","darkgreen"), new(14,12,"homeGreen","","darkgreen"), new(14,13,"homeGreen","","darkgreen"), new(14,14,"homeGreen","","darkgreen") }
 	};
 
-
-	public Board()
-	{
-		int boardsize = 15;
-
-		Frame.Clear();
-		List<Tile> TileList = new();
-		//string[,] board = new string[boardsize, boardsize];
-
-		for (int y = 0; y < boardsize; y++)
-		{
-			for (int x = 0; x < boardsize; x++)
-			{
-				//board[i, j] = "x ";
-				// if (i == 0)
-				// {
-				// 	if (j > 3 && j < 6)
-				// 	{
-				// 		Frame.Append(" ");
-				// 		continue;
-				// 	}
-				// }
-				if (y < Tiles.GetLength(0))
-				{
-					if (Tiles[y, x] != null) Tiles[y, x].DisplayTile();
-					else Console.Write("  ");
-					if (x == 14) Console.WriteLine();
-				}
-				Frame.Append(" ");
-			}
-			Frame.AppendLine();
-		}
-	}
-
 	public void DrawBoard()
 	{
 		Console.Clear();
 		Console.WriteLine("\x1b[3J");
 		Console.Clear();
 		Console.WriteLine("========Markus med knuff========");
-		//Console.WriteLine("================================");
 		Console.WriteLine();
 		BoardTop = Console.CursorTop;
 		for (int y = 0; y < 15; y++)
 		{
 			for (int x = 0; x < 15; x++)
 			{
-				if (Tiles[y, x] != null) Tiles[y, x].DisplayTile();
+				if (Tiles[y, x] != null) Tiles[y, x]?.DisplayTile();
 				else Console.Write("  ");
 				if (x == 14) Console.WriteLine();
 			}
