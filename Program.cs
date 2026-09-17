@@ -1,20 +1,9 @@
-﻿using System.Drawing;
-using System.Text;
-// class Home
-// {
-// 	public string Color { get; set; }
-// }
-
-// class TileList
-// {
-// 	List<Tile> TList = new();
-// }
-class Program
+﻿class Program
 {
 	static void Main()
 	{
 		Console.Clear();
-		GameState gS = new();
+		GameState fia = new();
 
 		int playerCount = 0;
 
@@ -43,9 +32,9 @@ class Program
 			break;
 		}
 
-		gS.AddPlayers(gS.GameBoard, playerCount);
-		gS.SetStartOrder(gS.GameBoard, playerCount);
+		fia.AddPlayers(fia.GameBoard, playerCount);
+		fia.SetStartOrder(fia.GameBoard, playerCount);
 
-		gS.Play();
+		fia.Play();
 	}
 }
