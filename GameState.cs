@@ -14,21 +14,21 @@ class GameState
 	{
 		foreach (Player p in Players)
 		{
-			Console.Write($"{p.Name} color: ");
+			//Console.Write($"{p.Name} color: ");
 
 			switch (p.Color)
 			{
 				case "red":
-					MColoredText.GetColoredText(ConsoleColor.Red, p.Color);
+					MColoredText.GetColoredText(ConsoleColor.Red, p.Name);
 					break;
 				case "blue":
-					MColoredText.GetColoredText(ConsoleColor.Blue, p.Color);
+					MColoredText.GetColoredText(ConsoleColor.Blue, p.Name);
 					break;
 				case "green":
-					MColoredText.GetColoredText(ConsoleColor.Green, p.Color);
+					MColoredText.GetColoredText(ConsoleColor.Green, p.Name);
 					break;
 				case "yellow":
-					MColoredText.GetColoredText(ConsoleColor.Yellow, p.Color);
+					MColoredText.GetColoredText(ConsoleColor.Yellow, p.Name);
 					break;
 			}
 			Console.WriteLine();
@@ -128,7 +128,7 @@ class GameState
 		Players = SetOrder(Players);
 		int order = 1;
 		ShowGame();
-		Console.WriteLine("Spel ordning");
+		Console.WriteLine("Turordning");
 		foreach (Player p in Players)
 		{
 			Console.WriteLine($"{order++}. {p.Name}");
@@ -173,26 +173,27 @@ class GameState
 		{
 			foreach (Piece piece in p.Pieces)
 			{
+				Coords tmp = new();
 				switch (p.Color.ToLower())
 				{
 					case "red":
 						switch (piece.Id)
 						{
 							case 1:
-								piece.Coords.Y = 1;
-								piece.Coords.X = 1;
+								tmp.Y = 1;
+								tmp.X = 1;
 								break;
 							case 2:
-								piece.Coords.Y = 1;
-								piece.Coords.X = 2;
+								tmp.Y = 1;
+								tmp.X = 2;
 								break;
 							case 3:
-								piece.Coords.Y = 2;
-								piece.Coords.X = 1;
+								tmp.Y = 2;
+								tmp.X = 1;
 								break;
 							case 4:
-								piece.Coords.Y = 2;
-								piece.Coords.X = 2;
+								tmp.Y = 2;
+								tmp.X = 2;
 								break;
 						}
 						break;
@@ -201,20 +202,20 @@ class GameState
 						switch (piece.Id)
 						{
 							case 1:
-								piece.Coords.Y = 1;
-								piece.Coords.X = 12;
+								tmp.Y = 1;
+								tmp.X = 12;
 								break;
 							case 2:
-								piece.Coords.Y = 1;
-								piece.Coords.X = 13;
+								tmp.Y = 1;
+								tmp.X = 13;
 								break;
 							case 3:
-								piece.Coords.Y = 2;
-								piece.Coords.X = 12;
+								tmp.Y = 2;
+								tmp.X = 12;
 								break;
 							case 4:
-								piece.Coords.Y = 2;
-								piece.Coords.X = 13;
+								tmp.Y = 2;
+								tmp.X = 13;
 								break;
 						}
 						break;
@@ -223,20 +224,20 @@ class GameState
 						switch (piece.Id)
 						{
 							case 1:
-								piece.Coords.Y = 12;
-								piece.Coords.X = 12;
+								tmp.Y = 12;
+								tmp.X = 12;
 								break;
 							case 2:
-								piece.Coords.Y = 12;
-								piece.Coords.X = 13;
+								tmp.Y = 12;
+								tmp.X = 13;
 								break;
 							case 3:
-								piece.Coords.Y = 13;
-								piece.Coords.X = 12;
+								tmp.Y = 13;
+								tmp.X = 12;
 								break;
 							case 4:
-								piece.Coords.Y = 13;
-								piece.Coords.X = 13;
+								tmp.Y = 13;
+								tmp.X = 13;
 								break;
 						}
 						break;
@@ -245,30 +246,32 @@ class GameState
 						switch (piece.Id)
 						{
 							case 1:
-								piece.Coords.Y = 12;
-								piece.Coords.X = 1;
+								tmp.Y = 12;
+								tmp.X = 1;
 								break;
 							case 2:
-								piece.Coords.Y = 12;
-								piece.Coords.X = 2;
+								tmp.Y = 12;
+								tmp.X = 2;
 								break;
 							case 3:
-								piece.Coords.Y = 13;
-								piece.Coords.X = 1;
+								tmp.Y = 13;
+								tmp.X = 1;
 								break;
 							case 4:
-								piece.Coords.Y = 13;
-								piece.Coords.X = 2;
+								tmp.Y = 13;
+								tmp.X = 2;
 								break;
 						}
 						break;
 				}
+
+				piece.Coords = tmp;
+
 				GameBoard.Tiles[piece.Coords.Y, piece.Coords.X]?.Pieces.Add(piece);
 				Console.SetCursorPosition(2 + (piece.Coords.X * 2), GameBoard.BoardTop + piece.Coords.Y);
 				GameBoard.Tiles[piece.Coords.Y, piece.Coords.X]?.DisplayTile();
 			}
 		}
-
 	}
 
 	public void Play()
