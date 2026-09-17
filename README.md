@@ -1,2 +1,3 @@
 # fia-med-knuff
-Skapa spelet fia med knuff i konsol - egen uppgift att göra under skolan
+Ett eget projekt för att återskapa spelet Fia med knuff i konsolen. 
+Arbetas vid sidan av skolan.
