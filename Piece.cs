@@ -3,6 +3,14 @@ class Piece
 	public string Color { get; set; }
 	public int Id { get; set; }
 
+	public (int, int) Position;
+
+	public void SetPosition(int x, int y)
+	{
+		Position = (x, y);
+	}
+
+
 	public void DrawPiece()
 	{
 		switch (Color)
@@ -22,5 +30,7 @@ class Piece
 		}
 		Console.ResetColor();
 		Console.WriteLine();
+
+		//ANVÄND egen funktion
 	}
 }
