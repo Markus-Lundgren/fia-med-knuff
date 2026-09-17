@@ -24,8 +24,7 @@ class Tile
 		{
 			MColoredText.GetColoredText(Pieces[0].Color, Pieces[0].PieceDisplay);
 		}
-
-		if (Special) MColoredText.GetColoredText(Color, "▨ ");
+		else if (Special) MColoredText.GetColoredText(Color, "▨ ");
 		else if (Color != "NONE") MColoredText.GetColoredText(Color, "▢ ");
 		else Console.Write("▢ ");
 	}
