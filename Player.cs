@@ -6,6 +6,15 @@ class Player
 	public int Score { get; set; }
 	public string? Color { get; set; }
 	public List<Piece> Pieces = new();
+
+	public Player()
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			Pieces.Add(new Piece(i + 1));
+			Console.WriteLine("Added piece " + (i + 1));
+		}
+	}
 	public int GetDiceRoll() => Random.Shared.Next(1, 7);
 	public void RollDice()
 	{

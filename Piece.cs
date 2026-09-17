@@ -5,6 +5,11 @@ class Piece
 
 	public (int, int) Position;
 
+	public Piece(int id)
+	{
+		Id = id;
+	}
+
 	public void SetPosition(int x, int y)
 	{
 		Position = (x, y);

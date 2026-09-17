@@ -45,5 +45,10 @@ class Program
 
 		gS.AddPlayers(gS.GameBoard, playerCount);
 		gS.SetStartOrder(gS.GameBoard, playerCount);
+
+		while (true)
+		{
+
+		}
 	}
 }
