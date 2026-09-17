@@ -174,7 +174,7 @@ class GameState
 			foreach (Piece piece in p.Pieces)
 			{
 				Coords tmp = new();
-				switch (p.Color.ToLower())
+				switch (p.Color?.ToLower())
 				{
 					case "red":
 						switch (piece.Id)

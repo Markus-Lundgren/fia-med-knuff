@@ -1,6 +1,6 @@
 static class MColoredText
 {
-	public static void GetColoredText(ConsoleColor color, string message, bool IsLine = false)
+	public static void GetColoredText(ConsoleColor color, string? message, bool IsLine = false)
 	{
 		if (!IsLine)
 		{
@@ -9,7 +9,7 @@ static class MColoredText
 			Console.ResetColor();
 		}
 	}
-	public static void GetColoredText(string input, string message, bool IsLine = false)
+	public static void GetColoredText(string input, string? message, bool IsLine = false)
 	{
 		ConsoleColor color = ConsoleColor.Black;
 		switch (input.ToLower())
