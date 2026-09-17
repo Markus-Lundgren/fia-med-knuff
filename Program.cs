@@ -15,8 +15,6 @@ class Program
 	{
 		Console.Clear();
 		GameState gS = new();
-		Board board = new();
-		board.CreateBoard();
 
 		int playerCount = 0;
 
@@ -26,7 +24,7 @@ class Program
 			Console.WriteLine("=Välkommen till Markus med knuff=");
 			Console.WriteLine("=================================");
 			Console.Write("Välj antal spelare 2-4: ");
-			string input = Console.ReadLine();
+			string input = Console.ReadLine()!;
 			if (!int.TryParse(input, out playerCount))
 			{
 				Console.WriteLine("Du måste skriva ett NUMMER mellan 2 och 4");
@@ -45,7 +43,7 @@ class Program
 			break;
 		}
 
-		gS.AddPlayers(board, playerCount);
-		gS.SetStartOrder(board, playerCount);
+		gS.AddPlayers(gS.GameBoard, playerCount);
+		gS.SetStartOrder(gS.GameBoard, playerCount);
 	}
 }
