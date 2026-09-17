@@ -5,8 +5,7 @@
 		Console.Clear();
 		GameState fia = new();
 
-		int playerCount = 0;
-
+		int playerCount;
 		while (true)
 		{
 			Console.Clear();
