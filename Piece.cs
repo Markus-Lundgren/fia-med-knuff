@@ -1,6 +1,6 @@
 class Piece
 {
-	public string Color { get; set; }
+	public string? Color { get; set; }
 	public int Id { get; set; }
 
 	public (int, int) Position;

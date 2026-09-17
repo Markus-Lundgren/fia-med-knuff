@@ -1,8 +1,5 @@
-using System.Text;
-
 class Board
 {
-	public StringBuilder Frame = new();
 	public int BoardTop { get; set; }
 
 	Tile?[,] Tiles { get; set; } =
