@@ -7,21 +7,21 @@ class Board
 
 	Tile?[,] Tiles { get; set; } =
 	{
-		{new Tile(0,0), new Tile(0,1), new Tile(0, 2), new Tile(0, 3), null, null, new Tile(0,6), new Tile(0,7), new Tile(0,8), null, null, new Tile(0, 11), new Tile(0, 12), new Tile(0, 13), new Tile(0, 14)},
-		{new Tile(1,0), new Tile(1,1), new Tile(1, 2), new Tile(1, 3), null, null, new Tile(1,6), new Tile(1,7), new Tile(1,8), null, null, new Tile(1, 11), new Tile(1, 12), new Tile(1, 13), new Tile(1, 14)},
-		{new Tile(2,0), new Tile(2,1), new Tile(2, 2), new Tile(2, 3), null, null, new Tile(2,6), new Tile(2,7), new Tile(2,8), null, null, new Tile(2, 11), new Tile(2, 12), new Tile(2, 13), new Tile(2, 14)},
-		{new Tile(3,0), new Tile(3,1), new Tile(3, 2), new Tile(3, 3), null, null, new Tile(3,6), new Tile(3,7), new Tile(3,8), null, null, new Tile(3, 11), new Tile(3, 12), new Tile(3, 13), new Tile(3, 14)},
-		{null, null, null, null, null, null, new Tile(4,6), new Tile(4,7), new Tile(4,8), null, null, null, null, null, null},
-		{null, null, null, null, null, null, new Tile(5,6), new Tile(5,7), new Tile(5,8), null, null, null, null, null, null},
-		{new Tile(6,0), new Tile(6,1), new Tile(6,2), new Tile(6,3), new Tile(6,4), new Tile(6,5), new Tile(6,6), new Tile(6,7), new Tile(6,8), new Tile(6,9), new Tile(6,10), new Tile(6,11), new Tile(6,12), new Tile(6,13), new Tile(6,14)},
-		{new Tile(7,0), new Tile(7,1), new Tile(7,2), new Tile(7,3), new Tile(7,4), new Tile(7,5), new Tile(7,6), new Tile(7,7), new Tile(7,8), new Tile(7,9), new Tile(7,10), new Tile(7,11), new Tile(7,12), new Tile(7,13), new Tile(7,14)},
-		{new Tile(8,0), new Tile(8,1), new Tile(8,2), new Tile(8,3), new Tile(8,4), new Tile(8,5), new Tile(8,6), new Tile(8,7), new Tile(8,8), new Tile(8,9), new Tile(8,10), new Tile(8,11), new Tile(8,12), new Tile(8,13), new Tile(8,14)},
-		{null, null, null, null, null, null, new Tile(9,6), new Tile(9,7), new Tile(9,8), null, null, null, null, null, null},
-		{null, null, null, null, null, null, new Tile(10,6), new Tile(10,7), new Tile(10,8), null, null, null, null, null, null},
-		{new Tile(11,0), new Tile(11,1), new Tile(11, 2), new Tile(11, 3), null, null, new Tile(11,6), new Tile(11,7), new Tile(11,8), null, null, new Tile(11, 11), new Tile(11, 12), new Tile(11, 13), new Tile(11, 14)},
-		{new Tile(12,0), new Tile(12,1), new Tile(12, 2), new Tile(12, 3), null, null, new Tile(12,6), new Tile(12,7), new Tile(12,8), null, null, new Tile(12, 11), new Tile(12, 12), new Tile(12, 13), new Tile(12, 14)},
-		{new Tile(13,0), new Tile(13,1), new Tile(13, 2), new Tile(13, 3), null, null, new Tile(13,6), new Tile(13,7), new Tile(13,8), null, null, new Tile(13, 11), new Tile(13, 12), new Tile(13, 13), new Tile(13, 14)},
-		{new Tile(14,0), new Tile(14,1), new Tile(14, 2), new Tile(14, 3), null, null, new Tile(14,6), new Tile(14,7), new Tile(14,8), null, null, new Tile(14, 11), new Tile(14, 12), new Tile(14, 13), new Tile(14, 14)},
+		{new Tile(0,0, "darkred"), new Tile(0,1, "darkred"), new Tile(0, 2, "darkred"), new Tile(0, 3, "darkred"), null, null, new Tile(0,6), new Tile(0,7), new Tile(0,8, "blue"), null, null, new Tile(0, 11, "darkblue"), new Tile(0, 12, "darkblue"), new Tile(0, 13, "darkblue"), new Tile(0, 14, "darkblue")},
+		{new Tile(1,0, "darkred"), new Tile(1,1, "darkred"), new Tile(1, 2, "darkred"), new Tile(1, 3, "darkred"), null, null, new Tile(1,6), new Tile(1,7, "darkblue"), new Tile(1,8), null, null, new Tile(1, 11, "darkblue"), new Tile(1, 12, "darkblue"), new Tile(1, 13, "darkblue"), new Tile(1, 14, "darkblue")},
+		{new Tile(2,0, "darkred"), new Tile(2,1, "darkred"), new Tile(2, 2, "darkred"), new Tile(2, 3, "darkred"), null, null, new Tile(2,6), new Tile(2,7, "darkblue"), new Tile(2,8), null, null, new Tile(2, 11, "darkblue"), new Tile(2, 12, "darkblue"), new Tile(2, 13, "darkblue"), new Tile(2, 14, "darkblue")},
+		{new Tile(3,0, "darkred"), new Tile(3,1, "darkred"), new Tile(3, 2, "darkred"), new Tile(3, 3, "darkred"), null, null, new Tile(3,6), new Tile(3,7, "darkblue"), new Tile(3,8), null, null, new Tile(3, 11, "darkblue"), new Tile(3, 12, "darkblue"), new Tile(3, 13, "darkblue"), new Tile(3, 14, "darkblue")},
+		{null, null, null, null, null, null, new Tile(4,6), new Tile(4,7, "darkblue"), new Tile(4,8), null, null, null, null, null, null},
+		{null, null, null, null, null, null, new Tile(5,6), new Tile(5,7, "darkblue"), new Tile(5,8), null, null, null, null, null, null},
+		{new Tile(6,0, "red"), new Tile(6,1), new Tile(6,2), new Tile(6,3), new Tile(6,4), new Tile(6,5), new Tile(6,6), new Tile(6,7), new Tile(6,8), new Tile(6,9), new Tile(6,10), new Tile(6,11), new Tile(6,12), new Tile(6,13), new Tile(6,14)},
+		{new Tile(7,0), new Tile(7,1, "darkred"), new Tile(7,2, "darkred"), new Tile(7,3, "darkred"), new Tile(7,4, "darkred"), new Tile(7,5, "darkred"), new Tile(7,6), new Tile(7,7), new Tile(7,8), new Tile(7,9, "darkgreen"), new Tile(7,10, "darkgreen"), new Tile(7,11, "darkgreen"), new Tile(7,12, "darkgreen"), new Tile(7,13, "darkgreen"), new Tile(7,14)},
+		{new Tile(8,0), new Tile(8,1), new Tile(8,2), new Tile(8,3), new Tile(8,4), new Tile(8,5), new Tile(8,6), new Tile(8,7), new Tile(8,8), new Tile(8,9), new Tile(8,10), new Tile(8,11), new Tile(8,12), new Tile(8,13), new Tile(8,14, "green")},
+		{null, null, null, null, null, null, new Tile(9,6), new Tile(9,7, "darkyellow"), new Tile(9,8), null, null, null, null, null, null},
+		{null, null, null, null, null, null, new Tile(10,6), new Tile(10,7, "darkyellow"), new Tile(10,8), null, null, null, null, null, null},
+		{new Tile(11,0, "darkyellow"), new Tile(11,1, "darkyellow"), new Tile(11, 2, "darkyellow"), new Tile(11, 3, "darkyellow"), null, null, new Tile(11,6), new Tile(11,7, "darkyellow"), new Tile(11,8), null, null, new Tile(11, 11, "darkgreen"), new Tile(11, 12, "darkgreen"), new Tile(11, 13, "darkgreen"), new Tile(11, 14, "darkgreen")},
+		{new Tile(12,0, "darkyellow"), new Tile(12,1, "darkyellow"), new Tile(12, 2, "darkyellow"), new Tile(12, 3, "darkyellow"), null, null, new Tile(12,6), new Tile(12,7, "darkyellow"), new Tile(12,8), null, null, new Tile(12, 11, "darkgreen"), new Tile(12, 12, "darkgreen"), new Tile(12, 13, "darkgreen"), new Tile(12, 14, "darkgreen")},
+		{new Tile(13,0, "darkyellow"), new Tile(13,1, "darkyellow"), new Tile(13, 2, "darkyellow"), new Tile(13, 3, "darkyellow"), null, null, new Tile(13,6), new Tile(13,7, "darkyellow"), new Tile(13,8), null, null, new Tile(13, 11, "darkgreen"), new Tile(13, 12, "darkgreen"), new Tile(13, 13, "darkgreen"), new Tile(13, 14, "darkgreen")},
+		{new Tile(14,0, "darkyellow"), new Tile(14,1, "darkyellow"), new Tile(14, 2, "darkyellow"), new Tile(14, 3, "darkyellow"), null, null, new Tile(14,6, "yellow"), new Tile(14,7), new Tile(14,8), null, null, new Tile(14, 11, "darkgreen"), new Tile(14, 12, "darkgreen"), new Tile(14, 13, "darkgreen"), new Tile(14, 14, "darkgreen")},
 	};
 
 	public Board()
