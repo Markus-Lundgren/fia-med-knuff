@@ -114,7 +114,7 @@ class GameState
 					Console.WriteLine($"{x.Name} fick: {x.DiceRoll}");
 				}
 			}
-			Console.WriteLine($"{p.Name} tur!");
+			Console.WriteLine($"{p.Name}'s tur!");
 			p.RollDice();
 
 			if (p == Players.Last())
@@ -180,6 +180,8 @@ class GameState
 				Console.Clear();
 				ShowGame();
 				Console.WriteLine("Dags att spela!");
+
+				p.RollDice();
 			}
 		}
 	}
