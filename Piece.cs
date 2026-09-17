@@ -4,7 +4,6 @@ class Piece
 	public int Id { get; set; }
 	public string PieceDisplay = "■ ";
 	public Coords Coords;
-
 	public Piece(int id)
 	{
 		Id = id;
