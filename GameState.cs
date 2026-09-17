@@ -165,6 +165,12 @@ class GameState
 		GameBoard.DrawBoard();
 		PlayerInfo();
 	}
+
+	public void SetupGame()
+	{
+		//Set pieces in corresponding home for each player of each color used
+	}
+
 	public void Play()
 	{
 		while (true)
@@ -173,8 +179,8 @@ class GameState
 			{
 				Console.Clear();
 				ShowGame();
-				Console.WriteLine("Dags att spela!");
-
+				Console.WriteLine($"{p.Name}'s tur!");
+				Console.WriteLine();
 				p.RollDice();
 			}
 		}
