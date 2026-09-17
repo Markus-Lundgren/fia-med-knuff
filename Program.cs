@@ -18,21 +18,18 @@ class GameState
 			switch (p.Color)
 			{
 				case "red":
-					Console.ForegroundColor = ConsoleColor.Red;
+					MColoredText.GetColoredText(ConsoleColor.Red, p.Color);
 					break;
 				case "blue":
-					Console.ForegroundColor = ConsoleColor.Blue;
+					MColoredText.GetColoredText(ConsoleColor.Blue, p.Color);
 					break;
 				case "green":
-					Console.ForegroundColor = ConsoleColor.Green;
+					MColoredText.GetColoredText(ConsoleColor.Green, p.Color);
 					break;
 				case "yellow":
-					Console.ForegroundColor = ConsoleColor.Yellow;
+					MColoredText.GetColoredText(ConsoleColor.Yellow, p.Color);
 					break;
 			}
-
-			Console.Write(p.Color);
-			Console.ResetColor();
 			Console.WriteLine();
 		}
 
@@ -55,13 +52,13 @@ class GameState
 				b.DrawBoard();
 				PlayerInfo();
 				Console.WriteLine("Tillgängliga färger");
-				int colorCount = 1;
+				int colorCount = 0;
 				colorMatch.Clear();
 
 				foreach (string c in colorList)
 				{
-					colorMatch.Add(colorCount, c);
-					Console.WriteLine($"{colorCount++}. {c}");
+					colorMatch.Add(++colorCount, c);
+					Console.WriteLine($"{colorCount}. {c}");
 				}
 				string color = MInput.GetInput($"Spelare {p.Id}, välj en färg: ");
 
@@ -134,6 +131,8 @@ class GameState
 		Player[] playerArray = new Player[playerCount];
 		Players = SetOrder(Players);
 		int order = 1;
+		b.DrawBoard();
+		PlayerInfo();
 		Console.WriteLine("Spel ordning");
 		foreach (Player p in Players)
 		{
@@ -233,7 +232,7 @@ class Board
 		Console.WriteLine("\x1b[3J");
 		Console.Clear();
 		Console.WriteLine("========Markus med knuff========");
-		Console.WriteLine("================================");
+		//Console.WriteLine("================================");
 		Console.WriteLine();
 		Console.WriteLine(Frame.ToString());
 	}
@@ -270,11 +269,20 @@ class Home : IColored
 {
 	public string Color { get; set; }
 }
-class Space : IColored
+class Tile
 {
 	public string Color { get; set; }
+
+	public void DisplayTile()
+	{
+
+	}
 }
 
+class TileList
+{
+	List<Tile> TList = new();
+}
 interface IColored
 {
 	public string Color { get; set; }
@@ -284,12 +292,13 @@ interface ISafe
 {
 	//Do something
 }
-class SafeSpace : Space, ISafe
+class SafeSpace : Tile, ISafe
 {
 
 }
 
-class FinishSpace : Space, ISafe
+
+class GoalTile : Tile, ISafe
 {
 
 }
