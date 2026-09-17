@@ -10,7 +10,6 @@ class Piece
 		Position = (x, y);
 	}
 
-
 	public void DrawPiece()
 	{
 		switch (Color)
