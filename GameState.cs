@@ -33,7 +33,7 @@ class GameState
 			}
 			Console.WriteLine();
 		}
-
+		Console.WriteLine();
 	}
 	public void AddPlayers(Board b, int count)
 	{
@@ -43,15 +43,13 @@ class GameState
 		for (int i = 0; i < count; i++)
 		{
 			Player p = new();
-			b.DrawBoard();
-			PlayerInfo();
+			ShowGame();
 			p.Id = i + 1;
 			p.Name = MInput.GetInput($"Spelare {p.Id}, välj ett namn: ");
 
 			while (true)
 			{
-				b.DrawBoard();
-				PlayerInfo();
+				ShowGame();
 				Console.WriteLine("Tillgängliga färger");
 				int colorCount = 0;
 				colorMatch.Clear();
@@ -103,8 +101,7 @@ class GameState
 
 		foreach (Player p in Players)
 		{
-			b.DrawBoard();
-			PlayerInfo();
+			ShowGame();
 			Console.WriteLine("Slå en tärning om vem som börjar!");
 			Console.WriteLine();
 			foreach (Player x in Players)
@@ -126,13 +123,10 @@ class GameState
 			}
 		}
 
-		b.DrawBoard();
-		PlayerInfo();
 		Player[] playerArray = new Player[playerCount];
 		Players = SetOrder(Players);
 		int order = 1;
-		b.DrawBoard();
-		PlayerInfo();
+		ShowGame();
 		Console.WriteLine("Spel ordning");
 		foreach (Player p in Players)
 		{
