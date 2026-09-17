@@ -9,9 +9,16 @@ class Player
 
 	public Player()
 	{
+
+	}
+
+	public void AddPieces(string color)
+	{
 		for (int i = 0; i < 4; i++)
 		{
-			Pieces.Add(new Piece(i + 1));
+			Piece p = new Piece(i + 1);
+			p.Color = color;
+			Pieces.Add(p);
 			Console.WriteLine("Added piece " + (i + 1));
 		}
 	}

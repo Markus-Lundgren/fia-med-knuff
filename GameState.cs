@@ -89,6 +89,7 @@ class GameState
 				{
 					p.Color = colorList[colorList.IndexOf(color.ToLower())];
 					colorList.Remove(p.Color);
+					p.AddPieces(p.Color);
 					Players.Add(p);
 					break;
 				}
@@ -169,6 +170,41 @@ class GameState
 	public void SetupGame()
 	{
 		//Set pieces in corresponding home for each player of each color used
+		foreach (Player p in Players)
+		{
+			foreach (Piece piece in p.Pieces)
+			{
+				(int y, int x) pos = (0, 0);
+
+				// Determine target tile coordinates based on color and piece ID
+				switch (p.Color.ToLower())
+				{
+					case "red":
+						pos = piece.Id switch { 1 => (1, 1), 2 => (1, 2), 3 => (2, 1), 4 => (2, 2), _ => (0, 0) };
+						break;
+					case "blue":
+						pos = piece.Id switch { 1 => (1, 12), 2 => (1, 13), 3 => (2, 12), 4 => (2, 13), _ => (0, 0) };
+						break;
+					case "yellow":
+						pos = piece.Id switch { 1 => (12, 1), 2 => (12, 2), 3 => (13, 1), 4 => (13, 2), _ => (0, 0) };
+						break;
+					case "green":
+						pos = piece.Id switch { 1 => (12, 12), 2 => (12, 13), 3 => (13, 12), 4 => (13, 13), _ => (0, 0) };
+						break;
+				}
+
+				// 1. Add piece to data structure
+				var targetTile = GameBoard.Tiles[pos.y, pos.x];
+				targetTile?.Pieces.Add(piece);
+
+				// 2. Set cursor to correct dynamic grid coordinate: X = 2 + (col * 2), Y = BoardTop + row
+				Console.SetCursorPosition(2 + (pos.x * 2), GameBoard.BoardTop + pos.y);
+
+				// 3. Render the tile at that position
+				targetTile?.DisplayTile();
+			}
+		}
+
 	}
 
 	public void Play()

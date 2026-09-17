@@ -32,8 +32,8 @@
 		}
 
 		fia.AddPlayers(fia.GameBoard, playerCount);
+		fia.SetupGame();
 		fia.SetStartOrder(fia.GameBoard, playerCount);
-
-		fia.Play();
+		//fia.Play();
 	}
 }

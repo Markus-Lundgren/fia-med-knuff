@@ -2,8 +2,8 @@ class Piece
 {
 	public string? Color { get; set; }
 	public int Id { get; set; }
-
-	public (int, int) Position;
+	public string PieceDisplay = "■ ";
+	public Coords Coords;
 
 	public Piece(int id)
 	{
@@ -12,29 +12,26 @@ class Piece
 
 	public void SetPosition(int x, int y)
 	{
-		Position = (x, y);
+		Coords = new Coords(x, y);
 	}
 
-	public void DrawPiece()
+	public void DrawPiece(Board b)
 	{
 		switch (Color)
 		{
 			case "red":
-				Console.ForegroundColor = ConsoleColor.Red;
+				MColoredText.GetColoredText(ConsoleColor.Red, PieceDisplay);
 				break;
 			case "blue":
-				Console.ForegroundColor = ConsoleColor.Blue;
+				MColoredText.GetColoredText(ConsoleColor.Blue, PieceDisplay);
 				break;
 			case "green":
-				Console.ForegroundColor = ConsoleColor.Green;
+				MColoredText.GetColoredText(ConsoleColor.Green, PieceDisplay);
 				break;
 			case "yellow":
-				Console.ForegroundColor = ConsoleColor.Yellow;
+				MColoredText.GetColoredText(ConsoleColor.Yellow, PieceDisplay);
 				break;
 		}
-		Console.ResetColor();
-		Console.WriteLine();
-
 		//ANVÄND egen funktion
 	}
 }
