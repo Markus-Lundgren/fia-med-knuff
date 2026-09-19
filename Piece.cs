@@ -3,6 +3,9 @@ class Piece
 	public string? Color { get; set; }
 	public int Id { get; set; }
 	public string PieceDisplay = "■ ";
+
+	public bool InHome = true;
+	public bool InGame = true;
 	public Coords Coords;
 	public Piece(int id)
 	{
@@ -36,6 +39,7 @@ class Piece
 
 	public void MoveHome(Board b)
 	{
+		InHome = true;
 		Coords tmp = new();
 		switch (Color?.ToLower())
 		{
@@ -139,8 +143,11 @@ class Piece
 
 	public void Move(Board b)
 	{
+		InHome = false;
 		Tile curTile = b.Tiles[Coords.Y, Coords.X];
 		Tile nextTile = null;
+
+		Console.CursorVisible = false;
 
 		foreach (Tile t in b.Tiles)
 		{
@@ -170,6 +177,6 @@ class Piece
 			Console.WriteLine($"ERROR! Felkoppling av tile: {curTile.Id} till {curTile.NextId}");
 			Console.ReadKey();
 		}
-
+		Console.CursorVisible = true;
 	}
 }

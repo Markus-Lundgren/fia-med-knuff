@@ -56,15 +56,81 @@ class Player
 
 		//Skapa logik för att skriva ut tillgängliga pjäser baserade på vissa kriterier
 
-		for (int i = 0; i < DiceRoll; i++)
+		//OM ALLA pjäser är i boet OCH DiceRoll != 1 ELLER DiceRoll != 6
+		//Visa igen, ge ett tröst meddelande
+		//
+
+		bool canMove = false;
+
+		if (DiceRoll == 1 || DiceRoll == 6)
 		{
-			foreach (Piece piece in Pieces)
+			canMove = true;
+		}
+
+		List<Piece> movable = new();
+
+		int pieceCount = 0;
+
+		foreach (Piece p in Pieces)
+		{
+			if (canMove || !p.InHome)
 			{
-				if (piece.Id != 1) continue;
-				piece.Move(b);
-				Thread.Sleep(250);
-				break;
+				movable.Add(p);
+				Console.WriteLine($"{++pieceCount}. Pjäs {p.Id}");
+				continue;
 			}
 		}
+
+		if (movable.Count == 0)
+		{
+			Console.WriteLine("Du kan inte flytta några pjäser!");
+			Console.WriteLine("Tryck på valfri knapp för nästa spelare!");
+			Console.ReadKey();
+			return;
+		}
+
+		Console.WriteLine();
+		int cursorTop = Console.CursorTop;
+		int choice = 0;
+
+
+		//TODO: Fixa logiskt feltänk
+		while (true)
+		{
+			Console.SetCursorPosition(0, cursorTop);
+			choice = MInput.GetInputAsInt("Välj en pjäs (skriv siffran till höger om pjäs pls): ");
+			Console.WriteLine();
+			if (choice < movable.Count || choice > movable.Count)
+			{
+				Console.SetCursorPosition(0, cursorTop);
+				Console.WriteLine("Ej ett giltig val! försök igen                                ");
+				continue;
+			}
+			break;
+		}
+
+		foreach (Piece piece in movable)
+		{
+			if (piece.Id != choice) continue;
+
+			if (piece.InHome)
+			{
+				piece.Move(b);
+				Thread.Sleep(250);
+			}
+			else
+			{
+				for (int i = 0; i < DiceRoll; i++)
+				{
+					piece.Move(b);
+					Thread.Sleep(250);
+				}
+			}
+		}
+	}
+
+	public void ShowAvailablePieces()
+	{
+
 	}
 }
