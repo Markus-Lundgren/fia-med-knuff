@@ -49,4 +49,14 @@ class Player
 		Console.WriteLine($"Du fick: {diceRoll}!");
 		Console.CursorVisible = true;
 	}
+
+	public void PlayRound(Piece p, Board b, Tile t)
+	{
+		if (DiceRoll == 0) RollDice();
+
+		for (int i = 0; i < DiceRoll; i++)
+		{
+
+		}
+	}
 }

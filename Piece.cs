@@ -133,4 +133,9 @@ class Piece
 		Console.SetCursorPosition(2 + (Coords.X * 2), b.BoardTop + Coords.Y);
 		b.Tiles[Coords.Y, Coords.X]?.DisplayTile();
 	}
+
+	public void Move()
+	{
+
+	}
 }
