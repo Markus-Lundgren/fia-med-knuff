@@ -50,13 +50,21 @@ class Player
 		Console.CursorVisible = true;
 	}
 
-	public void PlayRound(Piece p, Board b, Tile t)
+	public void PlayRound(Board b)
 	{
 		if (DiceRoll == 0) RollDice();
 
+		//Skapa logik för att skriva ut tillgängliga pjäser baserade på vissa kriterier
+
 		for (int i = 0; i < DiceRoll; i++)
 		{
-
+			foreach (Piece piece in Pieces)
+			{
+				if (piece.Id != 1) continue;
+				piece.Move(b);
+				Thread.Sleep(250);
+				break;
+			}
 		}
 	}
 }

@@ -43,9 +43,4 @@ class Board
 			}
 		}
 	}
-
-	public void MovePiece(Piece p)
-	{
-		Console.SetCursorPosition(2 + (p.Coords.X * 2), BoardTop + p.Coords.Y);
-	}
 }

@@ -93,8 +93,8 @@ class GameState
 				Players.Add(p);
 				break;
 			}
-			SetupGame();
 		}
+		SetupGame();
 	}
 	public void SetStartOrder(Board b, int playerCount)
 	{
@@ -189,6 +189,8 @@ class GameState
 				Console.WriteLine($"{p.Name}'s tur!");
 				Console.WriteLine();
 				p.RollDice();
+
+				p.PlayRound(GameBoard);
 			}
 		}
 	}

@@ -129,13 +129,47 @@ class Piece
 		}
 
 		Coords = tmp;
-		b.Tiles[Coords.Y, Coords.X]?.Pieces.Add(this);
-		Console.SetCursorPosition(2 + (Coords.X * 2), b.BoardTop + Coords.Y);
-		b.Tiles[Coords.Y, Coords.X]?.DisplayTile();
+
+		Tile tile = b.Tiles[Coords.Y, Coords.X];
+
+		if (!tile.Pieces.Contains(this)) tile.Pieces.Add(this);
+		Console.SetCursorPosition(Coords.X * 2, b.BoardTop + Coords.Y);
+		tile.DisplayTile();
 	}
 
-	public void Move()
+	public void Move(Board b)
 	{
+		Tile curTile = b.Tiles[Coords.Y, Coords.X];
+		Tile nextTile = null;
+
+		foreach (Tile t in b.Tiles)
+		{
+			if (t != null && t.Id == curTile.NextId)
+			{
+				nextTile = t;
+				break;
+			}
+		}
+
+		if (nextTile != null)
+		{
+			curTile.Pieces.Remove(this);
+			nextTile.Pieces.Add(this);
+
+			Console.SetCursorPosition(curTile.X * 2, b.BoardTop + curTile.Y);
+			curTile?.DisplayTile();
+
+			Coords.X = nextTile.X;
+			Coords.Y = nextTile.Y;
+
+			Console.SetCursorPosition(nextTile.X * 2, b.BoardTop + nextTile.Y);
+			nextTile.DisplayTile();
+		}
+		else
+		{
+			Console.WriteLine($"ERROR! Felkoppling av tile: {curTile.Id} till {curTile.NextId}");
+			Console.ReadKey();
+		}
 
 	}
 }
