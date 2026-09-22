@@ -220,7 +220,6 @@ class Piece
 					Player.Pieces.Remove(this);
 					nextTile.Pieces.Remove(this);
 					b.DrawBoard();
-					Player.Score++;
 				}
 			}
 		}

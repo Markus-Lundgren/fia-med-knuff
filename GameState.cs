@@ -212,13 +212,13 @@ class GameState
 		Console.Clear();
 		GameBoard.DrawBoard();
 
-		PlayerScore.AppendLine("=====================");
+		PlayerScore.AppendLine("=================================");
 		int order = 1;
 		foreach (Player p in WinnerOrder)
 		{
 			PlayerScore.AppendLine($"{order++}. {p.Name} {(WinnerOrder.First() == p ? " - Winner" : (WinnerOrder.Last() == p ? " - Loser" : ""))}");
 		}
-		PlayerScore.AppendLine("=====================");
+		PlayerScore.AppendLine("=================================");
 
 		Console.WriteLine(PlayerScore.ToString());
 	}

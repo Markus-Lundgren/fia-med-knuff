@@ -3,7 +3,6 @@ class Player
 	public string? Name { get; set; }
 	public int Id { get; set; }
 	public int DiceRoll = 0;
-	public int Score { get; set; }
 	public string? Color { get; set; }
 	public List<Piece> Pieces;
 	public Player()
