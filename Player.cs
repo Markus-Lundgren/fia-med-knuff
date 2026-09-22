@@ -15,7 +15,7 @@ class Player
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			Piece p = new Piece(i + 1);
+			Piece p = new Piece(i + 1, this);
 			p.Color = color;
 			Pieces.Add(p);
 			Console.WriteLine("Added piece " + (i + 1));
@@ -71,7 +71,7 @@ class Player
 			{
 				movable.Add(p);
 				pieceMatch.Add(++pieceCount, p);
-				Console.WriteLine($"{pieceCount}. Pjäs {p.Id}");
+				Console.WriteLine($"{pieceCount}. Pjäs {p.Id} {(p.InHome ? "i bas" : "ute")}{((p.Steps > 0) ? $", steg {p.Steps}" : "")}");
 				continue;
 			}
 		}
@@ -88,14 +88,15 @@ class Player
 		int cursorTop = Console.CursorTop;
 		int choice = 0;
 
-		Piece temp = null;
+		Piece temp = movable[0];
 
 
 		//TODO: Fixa logiskt feltänk
 
 		//NÄR tillgänglig pjäs finns
 		//Hämta val av pjäs
-		while (true)
+
+		while (movable.Count > 1)
 		{
 			Console.SetCursorPosition(0, cursorTop);
 			choice = MInput.GetInputAsInt("Välj en pjäs: ");
@@ -117,20 +118,20 @@ class Player
 		// {
 		//	if (piece.Id != choice) continue;
 
-		if (temp.InHome)
+		if (temp != null && temp.InHome && (DiceRoll == 1 || DiceRoll == 6))
 		{
-			temp.Move(b);
+			temp.Move(b, true);
 			Thread.Sleep(250);
 		}
 		else
 		{
 			for (int i = 0; i < DiceRoll; i++)
 			{
-				temp.Move(b);
+				if (i == DiceRoll - 1) temp.Move(b, true);
+				else temp.Move(b);
 				Thread.Sleep(250);
 			}
 		}
-		//}
 	}
 
 	public void ShowAvailablePieces()

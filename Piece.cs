@@ -3,13 +3,15 @@ class Piece
 	public string? Color { get; set; }
 	public int Id { get; set; }
 	public string PieceDisplay = "■ ";
-
 	public bool InHome = true;
 	public bool InGame = true;
+	public int Steps = 0;
+	public Player Player;
 	public Coords Coords;
-	public Piece(int id)
+	public Piece(int id, Player player)
 	{
 		Id = id;
+		Player = player;
 	}
 
 	public void SetPosition(int x, int y)
@@ -41,6 +43,7 @@ class Piece
 	{
 		InHome = true;
 		Coords tmp = new();
+		Steps = 0;
 		switch (Color?.ToLower())
 		{
 			case "red":
@@ -141,11 +144,12 @@ class Piece
 		tile.DisplayTile();
 	}
 
-	public void Move(Board b)
+	public void Move(Board b, bool lastMove = false)
 	{
 		InHome = false;
 		Tile curTile = b.Tiles[Coords.Y, Coords.X];
 		Tile nextTile = null;
+		Steps++;
 
 		Console.CursorVisible = false;
 
@@ -161,7 +165,6 @@ class Piece
 		if (nextTile != null)
 		{
 			curTile.Pieces.Remove(this);
-			nextTile.Pieces.Add(this);
 
 			Console.SetCursorPosition(curTile.X * 2, b.BoardTop + curTile.Y);
 			curTile?.DisplayTile();
@@ -169,8 +172,24 @@ class Piece
 			Coords.X = nextTile.X;
 			Coords.Y = nextTile.Y;
 
+			nextTile.Pieces.Add(this);
 			Console.SetCursorPosition(nextTile.X * 2, b.BoardTop + nextTile.Y);
 			nextTile.DisplayTile();
+			if (lastMove && nextTile.Pieces.Count > 1)
+			{
+				foreach (Piece p in nextTile.Pieces.ToList())
+				{
+					if (p != this)
+					{
+						p.MoveHome(b);
+						nextTile.Pieces.Remove(p);
+						nextTile.DisplayTile();
+						Console.SetCursorPosition(0, Console.WindowHeight - 1);
+						Console.WriteLine($"Spelare {Player.Name} slog ut spelare {p.Player.Name}'s pjäs {p.Id}\nTryck på valfri knapp för att forsätta");
+						Console.ReadKey();
+					}
+				}
+			}
 		}
 		else
 		{
@@ -178,5 +197,10 @@ class Piece
 			Console.ReadKey();
 		}
 		Console.CursorVisible = true;
+	}
+
+	private void MoveToSafe()
+	{
+
 	}
 }
