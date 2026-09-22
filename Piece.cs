@@ -179,13 +179,14 @@ class Piece
 			{
 				foreach (Piece p in nextTile.Pieces.ToList())
 				{
-					if (p != this)
+					if (p != this && p.Player.Name != Player.Name)
 					{
 						p.MoveHome(b);
 						nextTile.Pieces.Remove(p);
 						nextTile.DisplayTile();
 						Console.SetCursorPosition(0, Console.WindowHeight - 1);
 						Console.WriteLine($"Spelare {Player.Name} slog ut spelare {p.Player.Name}'s pjäs {p.Id}\nTryck på valfri knapp för att forsätta");
+						b.DrawBoard();
 						Console.ReadKey();
 					}
 				}
@@ -201,6 +202,6 @@ class Piece
 
 	private void MoveToSafe()
 	{
-
+		//switch
 	}
 }

@@ -47,6 +47,12 @@ class GameState
 			p.Id = i + 1;
 			p.Name = MInput.GetInput($"Spelare {p.Id}, välj ett namn: ");
 
+			var tmp = Players.Where(pl => pl.Name == p.Name);
+			while (tmp.Count() > 0)
+			{
+				p.Name = MInput.GetInput($"Spelare {p.Id}, välj ett annat namn: ");
+			}
+
 			while (true)
 			{
 				ShowGame();
@@ -186,7 +192,8 @@ class GameState
 			{
 				Console.Clear();
 				ShowGame();
-				Console.WriteLine($"{p.Name}'s tur!");
+				MColoredText.GetColoredText(p.Color, p.Name);
+				Console.WriteLine("'s tur!");
 				Console.WriteLine();
 				p.RollDice();
 
