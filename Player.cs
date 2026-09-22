@@ -54,12 +54,6 @@ class Player
 	{
 		if (DiceRoll == 0) RollDice();
 
-		//Skapa logik för att skriva ut tillgängliga pjäser baserade på vissa kriterier
-
-		//OM ALLA pjäser är i boet OCH DiceRoll != 1 ELLER DiceRoll != 6
-		//Visa igen, ge ett tröst meddelande
-		//
-
 		bool canMove = false;
 
 		if (DiceRoll == 1 || DiceRoll == 6)
@@ -68,7 +62,7 @@ class Player
 		}
 
 		List<Piece> movable = new();
-
+		Dictionary<int, Piece> pieceMatch = new();
 		int pieceCount = 0;
 
 		foreach (Piece p in Pieces)
@@ -76,7 +70,8 @@ class Player
 			if (canMove || !p.InHome)
 			{
 				movable.Add(p);
-				Console.WriteLine($"{++pieceCount}. Pjäs {p.Id}");
+				pieceMatch.Add(++pieceCount, p);
+				Console.WriteLine($"{pieceCount}. Pjäs {p.Id}");
 				continue;
 			}
 		}
@@ -93,40 +88,49 @@ class Player
 		int cursorTop = Console.CursorTop;
 		int choice = 0;
 
+		Piece temp = null;
+
 
 		//TODO: Fixa logiskt feltänk
+
+		//NÄR tillgänglig pjäs finns
+		//Hämta val av pjäs
 		while (true)
 		{
 			Console.SetCursorPosition(0, cursorTop);
-			choice = MInput.GetInputAsInt("Välj en pjäs (skriv siffran till höger om pjäs pls): ");
+			choice = MInput.GetInputAsInt("Välj en pjäs: ");
 			Console.WriteLine();
-			if (choice < movable.Count || choice > movable.Count)
+
+			if (!pieceMatch.ContainsKey(choice))
 			{
-				Console.SetCursorPosition(0, cursorTop);
-				Console.WriteLine("Ej ett giltig val! försök igen                                ");
+				//Console.SetCursorPosition(0, cursorTop);
+				Console.Write("Ej ett giltig val! försök igen                                ");
+				Console.WriteLine();
 				continue;
 			}
+			temp = movable[movable.IndexOf(pieceMatch[choice])];
 			break;
 		}
 
-		foreach (Piece piece in movable)
-		{
-			if (piece.Id != choice) continue;
 
-			if (piece.InHome)
+		// foreach (Piece piece in movable)
+		// {
+		//	if (piece.Id != choice) continue;
+
+		if (temp.InHome)
+		{
+			temp.Move(b);
+			Thread.Sleep(250);
+		}
+		else
+		{
+			for (int i = 0; i < DiceRoll; i++)
 			{
-				piece.Move(b);
+				temp.Move(b);
 				Thread.Sleep(250);
 			}
-			else
-			{
-				for (int i = 0; i < DiceRoll; i++)
-				{
-					piece.Move(b);
-					Thread.Sleep(250);
-				}
-			}
 		}
+		//}
 	}
 
 	public void ShowAvailablePieces()
