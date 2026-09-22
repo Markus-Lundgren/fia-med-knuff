@@ -5,6 +5,7 @@ class GameState
 	public List<Player> WinnerOrder = new();
 	public StringBuilder PlayerScore = new();
 	public Board GameBoard = new();
+	public int GameTop = Console.CursorTop;
 	public int PlayerCount = 0;
 	public void PlayerInfo()
 	{
@@ -131,6 +132,7 @@ class GameState
 		Console.WriteLine("Turordning");
 		foreach (Player p in Players)
 		{
+			p.PityRoll = 0;
 			Console.WriteLine($"{order++}. {p.Name}");
 		}
 	}

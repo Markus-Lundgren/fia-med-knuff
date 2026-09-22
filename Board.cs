@@ -1,7 +1,9 @@
+using System.Text;
+
 class Board
 {
 	public int BoardTop { get; set; }
-
+	public StringBuilder BoardString;
 	public Tile?[,] Tiles { get; set; } =
 	{
 		{ new(0,0,"homeRed","","darkred"), new(0,1,"homeRed","","darkred"), new(0,2,"homeRed","","darkred"), new(0,3,"homeRed","","darkred"), null, null, new(0,6,"tile55","tile56"), new(0,7,"tile56","enterBlue", "darkblue", "blueGoal"), new(0,8,"enterBlue","tile2","blue"), null, null, new(0,11,"homeBlue","","darkblue"), new(0,12,"homeBlue","","darkblue"), new(0,13,"homeBlue","","darkblue"), new(0,14,"homeBlue","","darkblue") },
@@ -36,8 +38,8 @@ class Board
 			{
 				if (Tiles[y, x] != null) Tiles[y, x]?.DisplayTile();
 				else Console.Write("  ");
-				if (x == 14) Console.WriteLine();
 			}
+			Console.WriteLine();
 		}
 	}
 }

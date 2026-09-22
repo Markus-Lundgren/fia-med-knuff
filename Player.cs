@@ -5,6 +5,7 @@ class Player
 	public int DiceRoll = 0;
 	public string? Color { get; set; }
 	public List<Piece> Pieces;
+	public int PityRoll = 0;
 	public Player()
 	{
 		Pieces = new();
@@ -22,12 +23,13 @@ class Player
 	public int GetDiceRoll() => Random.Shared.Next(1, 7);
 	public void RollDice()
 	{
+		int diceRollTop = Console.CursorTop;
 		Console.WriteLine("Slå en tärning!");
 		Console.Write("Tryck valfri knapp!");
 		int currentCursor = Console.CursorTop;
 		Console.ReadKey(true);
 		Console.SetCursorPosition(0, currentCursor);
-		Console.Write("                    ");
+		Console.Write("                                   ");
 		Console.CursorVisible = false;
 
 		int diceRoll = 0;
@@ -43,8 +45,25 @@ class Player
 			Thread.Sleep(250);
 		}
 		DiceRoll = diceRoll;
+		bool homeCheck = false;
+		foreach (Piece p in Pieces)
+		{
+			if (!p.InHome)
+			{
+				homeCheck = true;
+				break;
+			}
+		}
+		if (!homeCheck) PityRoll++;
+		if (PityRoll == 3)
+		{
+			DiceRoll = 6;
+			PityRoll = 0;
+		}
+		Console.WriteLine($"Du fick: {DiceRoll}!");
+		//Console.SetCursorPosition(0, diceRollTop);
 		Console.SetCursorPosition(0, currentCursor);
-		Console.WriteLine($"Du fick: {diceRoll}!");
+		Console.Write("                                   \n");
 		Console.CursorVisible = true;
 	}
 
@@ -96,14 +115,14 @@ class Player
 
 		while (movable.Count > 1)
 		{
-			Console.SetCursorPosition(0, cursorTop);
 			choice = MInput.GetInputAsInt("Välj en pjäs: ");
 			Console.WriteLine();
+			Console.SetCursorPosition(0, cursorTop);
 
 			if (!pieceMatch.ContainsKey(choice))
 			{
-				//Console.SetCursorPosition(0, cursorTop);
-				Console.Write("Ej ett giltig val! försök igen                                ");
+				Console.SetCursorPosition(0, Console.CursorTop - 1);
+				Console.Write("Ej ett giltig val! försök igen");
 				Console.WriteLine();
 				continue;
 			}
