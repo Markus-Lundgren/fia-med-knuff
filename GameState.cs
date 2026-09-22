@@ -199,8 +199,9 @@ class GameState
 					WinnerOrder.Add(p);
 					Players.Remove(p);
 				}
-				if (Players.Count == 0)
+				if (Players.Count == 1)
 				{
+					WinnerOrder.Add(p);
 					PrintScore();
 				}
 			}
