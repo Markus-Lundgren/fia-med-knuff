@@ -166,16 +166,16 @@ class Piece
 			switch (curTile.SpecialInfo)
 			{
 				case "redGoal":
-					nextCompare = "darkredPath1";
+					if (Color == "red") nextCompare = "darkredPath1";
 					break;
 				case "blueGoal":
-					nextCompare = "darkbluePath1";
+					if (Color == "blue") nextCompare = "darkbluePath1";
 					break;
 				case "greenGoal":
-					nextCompare = "darkgreenPath1";
+					if (Color == "green") nextCompare = "darkgreenPath1";
 					break;
 				case "yellowGoal":
-					nextCompare = "darkyellowPath1";
+					if (Color == "yellow") nextCompare = "darkyellowPath1";
 					break;
 			}
 			if (t != null && t.Id == nextCompare)
