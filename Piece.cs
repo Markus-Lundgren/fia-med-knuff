@@ -149,13 +149,36 @@ class Piece
 		InHome = false;
 		Tile curTile = b.Tiles[Coords.Y, Coords.X];
 		Tile nextTile = null;
+
+		string nextCompare = curTile.NextId;
 		Steps++;
 
 		Console.CursorVisible = false;
 
 		foreach (Tile t in b.Tiles)
 		{
-			if (t != null && t.Id == curTile.NextId)
+			//Kolla om du är på en goal tile
+			//Välj en path tile som nästa
+			// if(curTile == "redGoal") //do
+			// else if(curTile == "blueGoal")
+			// osv osv
+
+			switch (curTile.SpecialInfo)
+			{
+				case "redGoal":
+					nextCompare = "darkredPath1";
+					break;
+				case "blueGoal":
+					nextCompare = "darkbluePath1";
+					break;
+				case "greenGoal":
+					nextCompare = "darkgreenPath1";
+					break;
+				case "yellowGoal":
+					nextCompare = "darkyellowPath1";
+					break;
+			}
+			if (t != null && t.Id == nextCompare)
 			{
 				nextTile = t;
 				break;
@@ -200,8 +223,8 @@ class Piece
 		Console.CursorVisible = true;
 	}
 
-	private void MoveToSafe()
+	private void MoveToSafe(Board b)
 	{
-		//switch
+
 	}
 }
