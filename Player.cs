@@ -127,9 +127,6 @@ class Player
 		{
 			//OM StepsToGoal - Steps - DiceRoll > 0
 			//Exit
-
-
-
 			for (int i = 0; i < DiceRoll; i++)
 			{
 				if (i == DiceRoll - 1) temp.Move(b, true);

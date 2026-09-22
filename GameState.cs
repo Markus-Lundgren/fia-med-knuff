@@ -3,13 +3,8 @@ using System.Text;
 class GameState
 {
 	public List<Player> Players = new();
-
 	public StringBuilder PlayerScore = new();
-
-	public List<Player> PlayerOrder = new();
-
 	public Board GameBoard = new();
-
 	public void PlayerInfo()
 	{
 		foreach (Player p in Players)
@@ -104,8 +99,6 @@ class GameState
 	}
 	public void SetStartOrder(Board b, int playerCount)
 	{
-		Player[] playerOrder = new Player[playerCount];
-
 		foreach (Player p in Players)
 		{
 			ShowGame();

@@ -204,18 +204,27 @@ class Piece
 			nextTile.DisplayTile();
 			if (lastMove && nextTile.Pieces.Count > 1)
 			{
-				foreach (Piece p in nextTile.Pieces.ToList())
+				if (nextTile.Pieces.Count > 1)
 				{
-					if (p != this && p.Player.Name != Player.Name)
+					foreach (Piece p in nextTile.Pieces.ToList())
 					{
-						p.MoveHome(b);
-						nextTile.Pieces.Remove(p);
-						nextTile.DisplayTile();
-						Console.SetCursorPosition(0, Console.WindowHeight - 1);
-						Console.WriteLine($"Spelare {Player.Name} slog ut spelare {p.Player.Name}'s pjäs {p.Id}\nTryck på valfri knapp för att forsätta");
-						b.DrawBoard();
-						Console.ReadKey();
+						if (p != this && p.Player.Name != Player.Name)
+						{
+							p.MoveHome(b);
+							nextTile.Pieces.Remove(p);
+							nextTile.DisplayTile();
+							Console.SetCursorPosition(0, Console.WindowHeight - 1);
+							Console.WriteLine($"Spelare {Player.Name} slog ut spelare {p.Player.Name}'s pjäs {p.Id}\nTryck på valfri knapp för att forsätta");
+							b.DrawBoard();
+							Console.ReadKey();
+						}
 					}
+				}
+				if (nextTile.Id == "center")
+				{
+					Player.Pieces.Remove(this);
+					nextTile.Pieces.Remove(this);
+					b.DrawBoard();
 				}
 			}
 		}
