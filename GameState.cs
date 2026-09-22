@@ -3,8 +3,10 @@ using System.Text;
 class GameState
 {
 	public List<Player> Players = new();
+	public List<Player> WinnerOrder = new();
 	public StringBuilder PlayerScore = new();
 	public Board GameBoard = new();
+	public int PlayerCount = 0;
 	public void PlayerInfo()
 	{
 		foreach (Player p in Players)
@@ -30,12 +32,12 @@ class GameState
 		}
 		Console.WriteLine();
 	}
-	public void AddPlayers(Board b, int count)
+	public void AddPlayers(Board b)
 	{
 		List<string> colorList = ["red", "blue", "green", "yellow"];
 		Dictionary<int, string> colorMatch = new();
 
-		for (int i = 0; i < count; i++)
+		for (int i = 0; i < PlayerCount; i++)
 		{
 			Player p = new();
 			ShowGame();
@@ -181,7 +183,7 @@ class GameState
 	{
 		while (true)
 		{
-			foreach (Player p in Players)
+			foreach (Player p in Players.ToList())
 			{
 				if (p.Pieces.Count == 0) continue;
 				Console.Clear();
@@ -189,10 +191,38 @@ class GameState
 				MColoredText.GetColoredText(p.Color, p.Name);
 				Console.WriteLine("'s tur!");
 				Console.WriteLine();
-				p.RollDice();
+				//p.RollDice();
+				p.DiceRoll = 62;
+				if (p.Pieces[0].Steps == 0) p.DiceRoll = 1;
+
 				p.PlayRound(GameBoard);
-				if (p.Pieces.Count == 0) Console.WriteLine($"{p.Name} har gått ut med alla sina pjäser");
+				if (p.Pieces.Count == 0)
+				{
+					Console.WriteLine($"{p.Name} har gått ut med alla sina pjäser");
+					WinnerOrder.Add(p);
+					Players.Remove(p);
+				}
+				if (Players.Count == 0)
+				{
+					PrintScore();
+				}
 			}
 		}
+	}
+
+	public void PrintScore()
+	{
+		Console.Clear();
+		GameBoard.DrawBoard();
+
+		PlayerScore.AppendLine("=====================");
+		int order = 1;
+		foreach (Player p in WinnerOrder)
+		{
+			PlayerScore.AppendLine($"{order++}. {p.Name} {(WinnerOrder.First() == p ? " - Winner" : (WinnerOrder.Last() == p ? " - Loser" : ""))}");
+		}
+		PlayerScore.AppendLine("=====================");
+
+		Console.WriteLine(PlayerScore.ToString());
 	}
 }

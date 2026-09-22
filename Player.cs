@@ -13,7 +13,7 @@ class Player
 	}
 	public void AddPieces(string color)
 	{
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 1; i++) // 4 men bytte till 1
 		{
 			Piece p = new Piece(i + 1, this);
 			p.Color = color;
@@ -110,6 +110,16 @@ class Player
 			}
 
 			temp = movable[movable.IndexOf(pieceMatch[choice])];
+			var tmp = Pieces.Where(p => p.Steps == temp.Steps + DiceRoll);
+
+			if (tmp.Count() > 0)
+			{
+				Console.WriteLine();
+				Console.WriteLine("Du kan inte flytta denna pjäs");
+				Console.WriteLine("Tryck på valfri knapp för att gå vidare");
+				Console.ReadKey();
+				continue;
+			}
 			break;
 		}
 
@@ -131,13 +141,8 @@ class Player
 			{
 				if (i == DiceRoll - 1) temp.Move(b, true);
 				else temp.Move(b);
-				Thread.Sleep(250);
+				Thread.Sleep(25);
 			}
 		}
-	}
-
-	public void ShowAvailablePieces()
-	{
-
 	}
 }

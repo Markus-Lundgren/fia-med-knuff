@@ -202,7 +202,7 @@ class Piece
 			nextTile.Pieces.Add(this);
 			Console.SetCursorPosition(nextTile.X * 2, b.BoardTop + nextTile.Y);
 			nextTile.DisplayTile();
-			if (lastMove && nextTile.Pieces.Count > 1)
+			if (lastMove)
 			{
 				if (nextTile.Pieces.Count > 1)
 				{

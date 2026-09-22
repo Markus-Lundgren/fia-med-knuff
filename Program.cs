@@ -28,12 +28,15 @@
 				continue;
 			}
 			Console.WriteLine($"Antal valda spelare: {playerCount}");
+			fia.PlayerCount = playerCount;
 			break;
 		}
 
-		fia.AddPlayers(fia.GameBoard, playerCount);
+		fia.AddPlayers(fia.GameBoard);
 		fia.SetupGame();
 		fia.SetStartOrder(fia.GameBoard, playerCount);
 		fia.Play();
+		Console.WriteLine("Tack för att ni spelade Markus med knuff");
+		Environment.Exit(0);
 	}
 }
