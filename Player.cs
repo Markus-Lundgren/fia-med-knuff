@@ -67,7 +67,9 @@ class Player
 
 		foreach (Piece p in Pieces)
 		{
-			if (canMove || !p.InHome)
+			//OM StepsToGoal - Steps - DiceRoll > 0
+			//Låt ej användare välja den pjäsen
+			if ((canMove || !p.InHome) && (Piece.StepsToGoal - p.Steps - DiceRoll < 0))
 			{
 				movable.Add(p);
 				pieceMatch.Add(++pieceCount, p);
@@ -90,9 +92,6 @@ class Player
 
 		Piece temp = movable[0];
 
-
-		//TODO: Fixa logiskt feltänk
-
 		//NÄR tillgänglig pjäs finns
 		//Hämta val av pjäs
 
@@ -109,6 +108,7 @@ class Player
 				Console.WriteLine();
 				continue;
 			}
+
 			temp = movable[movable.IndexOf(pieceMatch[choice])];
 			break;
 		}
@@ -125,6 +125,11 @@ class Player
 		}
 		else
 		{
+			//OM StepsToGoal - Steps - DiceRoll > 0
+			//Exit
+
+
+
 			for (int i = 0; i < DiceRoll; i++)
 			{
 				if (i == DiceRoll - 1) temp.Move(b, true);

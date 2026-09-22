@@ -6,6 +6,8 @@ class Piece
 	public bool InHome = true;
 	public bool InGame = true;
 	public int Steps = 0;
+	public int StepsLeft = 63;
+	public static int StepsToGoal = 63;
 	public Player Player;
 	public Coords Coords;
 	public Piece(int id, Player player)
@@ -44,6 +46,7 @@ class Piece
 		InHome = true;
 		Coords tmp = new();
 		Steps = 0;
+		StepsLeft = 63;
 		switch (Color?.ToLower())
 		{
 			case "red":
@@ -152,6 +155,7 @@ class Piece
 
 		string nextCompare = curTile.NextId;
 		Steps++;
+		StepsLeft--;
 
 		Console.CursorVisible = false;
 
