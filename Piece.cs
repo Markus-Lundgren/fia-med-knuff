@@ -4,7 +4,6 @@ class Piece
 	public int Id { get; set; }
 	public string PieceDisplay = "■ ";
 	public bool InHome = true;
-	public bool InGame = true;
 	public int Steps = 0;
 	public int StepsLeft = 63;
 	public static int StepsToGoal = 63;
@@ -38,7 +37,6 @@ class Piece
 				MColoredText.GetColoredText(ConsoleColor.Yellow, PieceDisplay);
 				break;
 		}
-		//ANVÄND egen funktion
 	}
 
 	public void MoveHome(Board b)
@@ -163,9 +161,6 @@ class Piece
 		{
 			//Kolla om du är på en goal tile
 			//Välj en path tile som nästa
-			// if(curTile == "redGoal") //do
-			// else if(curTile == "blueGoal")
-			// osv osv
 
 			switch (curTile.SpecialInfo)
 			{
@@ -235,10 +230,5 @@ class Piece
 			Console.ReadKey();
 		}
 		Console.CursorVisible = true;
-	}
-
-	private void MoveToSafe(Board b)
-	{
-
 	}
 }

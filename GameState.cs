@@ -1,5 +1,4 @@
 using System.Text;
-
 class GameState
 {
 	public List<Player> Players = new();
@@ -191,9 +190,7 @@ class GameState
 				MColoredText.GetColoredText(p.Color, p.Name);
 				Console.WriteLine("'s tur!");
 				Console.WriteLine();
-				//p.RollDice();
-				p.DiceRoll = 62;
-				if (p.Pieces[0].Steps == 0) p.DiceRoll = 1;
+				p.RollDice();
 
 				p.PlayRound(GameBoard);
 				if (p.Pieces.Count == 0)

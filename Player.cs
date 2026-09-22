@@ -6,14 +6,13 @@ class Player
 	public int Score { get; set; }
 	public string? Color { get; set; }
 	public List<Piece> Pieces;
-
 	public Player()
 	{
 		Pieces = new();
 	}
 	public void AddPieces(string color)
 	{
-		for (int i = 0; i < 1; i++) // 4 men bytte till 1
+		for (int i = 0; i < 4; i++)
 		{
 			Piece p = new Piece(i + 1, this);
 			p.Color = color;
@@ -123,15 +122,10 @@ class Player
 			break;
 		}
 
-
-		// foreach (Piece piece in movable)
-		// {
-		//	if (piece.Id != choice) continue;
-
 		if (temp != null && temp.InHome && (DiceRoll == 1 || DiceRoll == 6))
 		{
 			temp.Move(b, true);
-			Thread.Sleep(250);
+			Thread.Sleep(125);
 		}
 		else
 		{
@@ -141,7 +135,7 @@ class Player
 			{
 				if (i == DiceRoll - 1) temp.Move(b, true);
 				else temp.Move(b);
-				Thread.Sleep(25);
+				Thread.Sleep(125);
 			}
 		}
 	}

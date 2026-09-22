@@ -2,10 +2,7 @@ class Board
 {
 	public int BoardTop { get; set; }
 
-	public
-
-	Tile?[,] Tiles
-	{ get; set; } =
+	public Tile?[,] Tiles { get; set; } =
 	{
 		{ new(0,0,"homeRed","","darkred"), new(0,1,"homeRed","","darkred"), new(0,2,"homeRed","","darkred"), new(0,3,"homeRed","","darkred"), null, null, new(0,6,"tile55","tile56"), new(0,7,"tile56","enterBlue", "darkblue", "blueGoal"), new(0,8,"enterBlue","tile2","blue"), null, null, new(0,11,"homeBlue","","darkblue"), new(0,12,"homeBlue","","darkblue"), new(0,13,"homeBlue","","darkblue"), new(0,14,"homeBlue","","darkblue") },
 		{ new(1,0,"homeRed","","darkred"), new(1,1,"homeRed1","enterRed","darkred"), new(1,2,"homeRed2","enterRed","darkred"), new(1,3,"homeRed","","darkred"), null, null, new(1,6,"tile54","tile55"), new(1,7,"darkbluePath1","darkbluePath2","darkblue"), new(1,8,"tile2","tile3"), null, null, new(1,11,"homeBlue","","darkblue"), new(1,12,"homeBlue1","enterBlue","darkblue"), new(1,13,"homeBlue2","enterBlue","darkblue"), new(1,14,"homeBlue","","darkblue") },
