@@ -160,13 +160,11 @@ class GameState
 		}
 		return tempOrder;
 	}
-
 	private void ShowGame()
 	{
 		GameBoard.DrawBoard();
 		PlayerInfo();
 	}
-
 	public void SetupGame()
 	{
 		foreach (Player p in Players)
@@ -177,7 +175,6 @@ class GameState
 			}
 		}
 	}
-
 	public void Play()
 	{
 		while (true)
@@ -207,7 +204,6 @@ class GameState
 			}
 		}
 	}
-
 	public void PrintScore()
 	{
 		Console.Clear();

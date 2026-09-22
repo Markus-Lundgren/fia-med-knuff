@@ -67,6 +67,7 @@ class Player
 		{
 			//OM StepsToGoal - Steps - DiceRoll > 0
 			//Låt ej användare välja den pjäsen
+			//OBS om 6a 
 			if ((canMove || !p.InHome) && (Piece.StepsToGoal - p.Steps - DiceRoll >= 0))
 			{
 				movable.Add(p);
@@ -110,7 +111,7 @@ class Player
 			temp = movable[movable.IndexOf(pieceMatch[choice])];
 			var tmp = Pieces.Where(p => p.Steps == temp.Steps + DiceRoll);
 
-			if (tmp.Count() > 0)
+			if (tmp.Count() > 0 && !temp.InHome)
 			{
 				Console.WriteLine();
 				Console.WriteLine("Du kan inte flytta denna pjäs");
