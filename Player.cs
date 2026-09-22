@@ -69,7 +69,7 @@ class Player
 		{
 			//OM StepsToGoal - Steps - DiceRoll > 0
 			//Låt ej användare välja den pjäsen
-			if ((canMove || !p.InHome) && (Piece.StepsToGoal - p.Steps - DiceRoll < 0))
+			if ((canMove || !p.InHome) && (Piece.StepsToGoal - p.Steps - DiceRoll >= 0))
 			{
 				movable.Add(p);
 				pieceMatch.Add(++pieceCount, p);

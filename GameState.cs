@@ -183,14 +183,15 @@ class GameState
 		{
 			foreach (Player p in Players)
 			{
+				if (p.Pieces.Count == 0) continue;
 				Console.Clear();
 				ShowGame();
 				MColoredText.GetColoredText(p.Color, p.Name);
 				Console.WriteLine("'s tur!");
 				Console.WriteLine();
 				p.RollDice();
-
 				p.PlayRound(GameBoard);
+				if (p.Pieces.Count == 0) Console.WriteLine($"{p.Name} har gått ut med alla sina pjäser");
 			}
 		}
 	}
