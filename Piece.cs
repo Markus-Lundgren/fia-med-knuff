@@ -209,8 +209,8 @@ class Piece
 							nextTile.Pieces.Remove(p);
 							nextTile.DisplayTile();
 							Console.SetCursorPosition(0, Console.WindowHeight - 1);
-							Console.WriteLine($"Spelare {Player.Name} slog ut spelare {p.Player.Name}'s pjäs {p.Id}\nTryck på valfri knapp för att forsätta");
 							b.DrawBoard();
+							Console.WriteLine($"Spelare {Player.Name} slog ut spelare {p.Player.Name}'s pjäs {p.Id}\nTryck på valfri knapp för att forsätta");
 							Console.ReadKey();
 						}
 					}
