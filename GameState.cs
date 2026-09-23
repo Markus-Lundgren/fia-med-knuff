@@ -102,8 +102,9 @@ class GameState
 		foreach (Player p in Players)
 		{
 			ShowGame();
-			Console.WriteLine("Slå en tärning om vem som börjar!");
+			Board.WriteText("Slå en tärning om vem som börjar!", 1);
 			Console.WriteLine();
+			int loop = 0;
 			foreach (Player x in Players)
 			{
 				if (x.DiceRoll > 0)
@@ -112,7 +113,7 @@ class GameState
 				}
 			}
 			Console.WriteLine($"{p.Name}'s tur!");
-			p.RollDice();
+			p.RollDice(true);
 
 			if (p == Players.Last())
 			{

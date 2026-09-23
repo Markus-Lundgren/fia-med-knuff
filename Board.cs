@@ -4,6 +4,8 @@ class Board
 {
 	public static int BoardTop { get; set; }
 	public StringBuilder BoardString;
+
+	private static int lineCount = 0;
 	public Tile?[,] Tiles { get; set; } =
 	{
 		{ new(0,0,"homeRed","","darkred"), new(0,1,"homeRed","","darkred"), new(0,2,"homeRed","","darkred"), new(0,3,"homeRed","","darkred"), null, null, new(0,6,"tile55","tile56"), new(0,7,"tile56","enterBlue", "darkblue", "blueGoal"), new(0,8,"enterBlue","tile2","blue"), null, null, new(0,11,"homeBlue","","darkblue"), new(0,12,"homeBlue","","darkblue"), new(0,13,"homeBlue","","darkblue"), new(0,14,"homeBlue","","darkblue") },
@@ -43,13 +45,27 @@ class Board
 		}
 	}
 
-	public static void WriteText(string message, int offset)
+	public static void WriteText(string message, int offsetY, int offsetX = 0)
 	{
-		int cursor = BoardTop + 16 + offset;
+		if (lineCount < offsetY) lineCount = offsetY;
+		int cursor = BoardTop + 16 + offsetY;
 
-		Console.SetCursorPosition(0, cursor);
+		Console.SetCursorPosition(offsetX, cursor);
 		Console.Write(new string(' ', Console.WindowWidth));
-		Console.SetCursorPosition(0, cursor);
+		Console.SetCursorPosition(offsetX, cursor);
 		Console.Write(message);
+	}
+
+	public static void ClearTextbox()
+	{
+		int cursor = BoardTop + 16 + lineCount;
+
+		for (int i = 0; i < lineCount; i++)
+		{
+			Console.SetCursorPosition(0, cursor - i);
+			Console.Write(new string(' ', Console.WindowWidth));
+		}
+
+		lineCount = 0;
 	}
 }

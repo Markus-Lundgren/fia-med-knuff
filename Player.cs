@@ -21,27 +21,19 @@ class Player
 		}
 	}
 	public int GetDiceRoll() => Random.Shared.Next(1, 7);
-	public void RollDice()
+	public void RollDice(bool start = false)
 	{
 		int diceRollTop = Console.CursorTop;
-		Console.WriteLine("Slå en tärning!");
-		Console.Write("Tryck valfri knapp!");
-
-		int currentCursor = Console.CursorTop;
-		Console.ReadKey(true);
-		//Console.SetCursorPosition(0, currentCursor);
-		Console.Write(new string(' ', Console.WindowWidth));
+		if (!start) Board.WriteText("Slå en tärning!", 1);
+		Board.WriteText("Tryck valfri knapp!", 2);
+		Console.ReadKey(true); ;
 
 		int diceRoll = 0;
-		currentCursor = Console.CursorTop;
-
+		Board.WriteText($"Tärning: ", 2);
 		for (int i = 0; i < 7; i++)
 		{
-			Console.SetCursorPosition(0, currentCursor);
-
 			diceRoll = GetDiceRoll();
-			Console.Write($"Tärning: {diceRoll}");
-
+			Board.WriteText($"{diceRoll}", 2, 9);
 			Thread.Sleep(250);
 		}
 		DiceRoll = diceRoll;
@@ -60,11 +52,7 @@ class Player
 			DiceRoll = 6;
 			PityRoll = 0;
 		}
-
-		Console.SetCursorPosition(0, currentCursor);
-		Console.WriteLine($"Du fick: {DiceRoll}!                                       ");
-		//Console.SetCursorPosition(0, currentCursor);
-		//Console.Write("                                   \n");
+		Board.WriteText($"Du fick: {DiceRoll}", 2);
 	}
 
 	public void PlayRound(Board b)
