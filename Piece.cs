@@ -147,6 +147,7 @@ class Piece
 
 	public void Move(Board b, bool lastMove = false)
 	{
+		Console.SetCursorPosition(0, b.BoardTop);
 		InHome = false;
 		Tile curTile = b.Tiles[Coords.Y, Coords.X];
 		Tile nextTile = null;

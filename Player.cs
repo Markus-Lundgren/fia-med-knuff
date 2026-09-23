@@ -28,8 +28,8 @@ class Player
 		Console.Write("Tryck valfri knapp!");
 		int currentCursor = Console.CursorTop;
 		Console.ReadKey(true);
-		Console.SetCursorPosition(0, currentCursor);
-		Console.Write("                                   ");
+		//Console.SetCursorPosition(0, currentCursor);
+		Console.Write(new string(' ', Console.WindowWidth));
 		Console.CursorVisible = false;
 
 		int diceRoll = 0;
@@ -60,10 +60,11 @@ class Player
 			DiceRoll = 6;
 			PityRoll = 0;
 		}
-		Console.WriteLine($"Du fick: {DiceRoll}!");
-		//Console.SetCursorPosition(0, diceRollTop);
+
 		Console.SetCursorPosition(0, currentCursor);
-		Console.Write("                                   \n");
+		Console.WriteLine($"Du fick: {DiceRoll}!                                       ");
+		//Console.SetCursorPosition(0, currentCursor);
+		//Console.Write("                                   \n");
 		Console.CursorVisible = true;
 	}
 
@@ -82,7 +83,7 @@ class Player
 		Dictionary<int, Piece> pieceMatch = new();
 		int pieceCount = 0;
 
-		foreach (Piece p in Pieces)
+		foreach (Piece p in Pieces.OrderByDescending(p => p.Steps).ToList())
 		{
 			//OM StepsToGoal - Steps - DiceRoll > 0
 			//Låt ej användare välja den pjäsen
