@@ -99,20 +99,20 @@ class GameState
 	}
 	public void SetStartOrder(Board b, int playerCount)
 	{
+		int loop = 2;
 		foreach (Player p in Players)
 		{
 			ShowGame();
 			Board.WriteText("Slå en tärning om vem som börjar!", 1);
 			Console.WriteLine();
-			int loop = 0;
 			foreach (Player x in Players)
 			{
 				if (x.DiceRoll > 0)
 				{
-					Console.WriteLine($"{x.Name} fick: {x.DiceRoll}");
+					Board.WriteText($"{x.Name} fick: {x.DiceRoll}", ++loop);
 				}
 			}
-			Console.WriteLine($"{p.Name}'s tur!");
+			Board.WriteText($"{p.Name}'s tur!", 2);
 			p.RollDice(true);
 
 			if (p == Players.Last())
@@ -195,7 +195,7 @@ class GameState
 				p.PlayRound(GameBoard);
 				if (p.Pieces.Count == 0)
 				{
-					Console.WriteLine($"{p.Name} har gått ut med alla sina pjäser");
+					Board.WriteText($"{p.Name} har gått ut med alla sina pjäser", 3);
 					WinnerOrder.Add(p);
 					Players.Remove(p);
 				}
