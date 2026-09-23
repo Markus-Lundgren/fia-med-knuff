@@ -4,6 +4,7 @@
 	{
 		Console.Clear();
 		GameState fia = new();
+		Console.CursorVisible = false;
 
 		int playerCount;
 		while (true)
@@ -37,6 +38,7 @@
 		fia.SetStartOrder(fia.GameBoard, playerCount);
 		fia.Play();
 		Console.WriteLine("Tack för att ni spelade Markus med knuff");
+		Console.CursorVisible = true;
 		Environment.Exit(0);
 	}
 }

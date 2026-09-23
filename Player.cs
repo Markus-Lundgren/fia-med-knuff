@@ -30,7 +30,6 @@ class Player
 		Console.ReadKey(true);
 		//Console.SetCursorPosition(0, currentCursor);
 		Console.Write(new string(' ', Console.WindowWidth));
-		Console.CursorVisible = false;
 
 		int diceRoll = 0;
 		currentCursor = Console.CursorTop;
@@ -65,7 +64,6 @@ class Player
 		Console.WriteLine($"Du fick: {DiceRoll}!                                       ");
 		//Console.SetCursorPosition(0, currentCursor);
 		//Console.Write("                                   \n");
-		Console.CursorVisible = true;
 	}
 
 	public void PlayRound(Board b)
@@ -141,7 +139,6 @@ class Player
 			}
 			break;
 		}
-		Console.CursorVisible = false;
 		if (temp != null && temp.InHome && (DiceRoll == 1 || DiceRoll == 6))
 		{
 			temp.Move(b, true);
@@ -158,6 +155,5 @@ class Player
 				Thread.Sleep(125);
 			}
 		}
-		Console.CursorVisible = true;
 	}
 }

@@ -11,8 +11,6 @@ class GameState
 	{
 		foreach (Player p in Players)
 		{
-			//Console.Write($"{p.Name} color: ");
-
 			switch (p.Color)
 			{
 				case "red":
