@@ -178,7 +178,7 @@ class GameState
 	}
 	public void Play()
 	{
-		while (true)
+		while (Players.Count > 1)
 		{
 			foreach (Player p in Players.ToList())
 			{
@@ -201,7 +201,7 @@ class GameState
 				}
 				if (Players.Count == 1)
 				{
-					WinnerOrder.Add(p);
+					WinnerOrder.Add(Players.First());
 					PrintScore();
 				}
 			}
