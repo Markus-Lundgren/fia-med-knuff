@@ -147,7 +147,6 @@ class Piece
 
 	public void Move(Board b, bool lastMove = false)
 	{
-		Console.SetCursorPosition(0, b.BoardTop);
 		InHome = false;
 		Tile curTile = b.Tiles[Coords.Y, Coords.X];
 		Tile nextTile = null;
@@ -155,8 +154,6 @@ class Piece
 		string nextCompare = curTile.NextId;
 		Steps++;
 		StepsLeft--;
-
-		Console.CursorVisible = false;
 
 		foreach (Tile t in b.Tiles)
 		{
@@ -187,8 +184,8 @@ class Piece
 
 		if (nextTile != null)
 		{
+			Console.SetCursorPosition(0, b.BoardTop);
 			curTile.Pieces.Remove(this);
-
 			Console.SetCursorPosition(curTile.X * 2, b.BoardTop + curTile.Y);
 			curTile?.DisplayTile();
 
@@ -229,6 +226,5 @@ class Piece
 			Console.WriteLine($"ERROR! Felkoppling av tile: {curTile.Id} till {curTile.NextId}");
 			Console.ReadKey();
 		}
-		Console.CursorVisible = true;
 	}
 }

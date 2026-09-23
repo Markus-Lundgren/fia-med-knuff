@@ -141,7 +141,7 @@ class Player
 			}
 			break;
 		}
-
+		Console.CursorVisible = false;
 		if (temp != null && temp.InHome && (DiceRoll == 1 || DiceRoll == 6))
 		{
 			temp.Move(b, true);
@@ -158,5 +158,6 @@ class Player
 				Thread.Sleep(125);
 			}
 		}
+		Console.CursorVisible = true;
 	}
 }
