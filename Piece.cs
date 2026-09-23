@@ -182,49 +182,49 @@ class Piece
 			}
 		}
 
-		if (nextTile != null)
-		{
-			Console.SetCursorPosition(0, b.BoardTop);
-			curTile.Pieces.Remove(this);
-			Console.SetCursorPosition(curTile.X * 2, b.BoardTop + curTile.Y);
-			curTile?.DisplayTile();
 
-			Coords.X = nextTile.X;
-			Coords.Y = nextTile.Y;
-
-			nextTile.Pieces.Add(this);
-			Console.SetCursorPosition(nextTile.X * 2, b.BoardTop + nextTile.Y);
-			nextTile.DisplayTile();
-			if (lastMove)
-			{
-				if (nextTile.Pieces.Count > 1)
-				{
-					foreach (Piece p in nextTile.Pieces.ToList())
-					{
-						if (p != this && p.Player.Name != Player.Name)
-						{
-							p.MoveHome(b);
-							nextTile.Pieces.Remove(p);
-							nextTile.DisplayTile();
-							Console.SetCursorPosition(0, Console.WindowHeight - 1);
-							b.DrawBoard();
-							Console.WriteLine($"Spelare {Player.Name} slog ut spelare {p.Player.Name}'s pjäs {p.Id}\nTryck på valfri knapp för att forsätta");
-							Console.ReadKey();
-						}
-					}
-				}
-				if (nextTile.Id == "center")
-				{
-					Player.Pieces.Remove(this);
-					nextTile.Pieces.Remove(this);
-					b.DrawBoard();
-				}
-			}
-		}
-		else
+		if (nextTile == null)
 		{
 			Console.WriteLine($"ERROR! Felkoppling av tile: {curTile.Id} till {curTile.NextId}");
 			Console.ReadKey();
+			return;
+		}
+
+		Console.SetCursorPosition(0, b.BoardTop);
+		curTile.Pieces.Remove(this);
+		Console.SetCursorPosition(curTile.X * 2, b.BoardTop + curTile.Y);
+		curTile?.DisplayTile();
+
+		Coords.X = nextTile.X;
+		Coords.Y = nextTile.Y;
+
+		nextTile.Pieces.Add(this);
+		Console.SetCursorPosition(nextTile.X * 2, b.BoardTop + nextTile.Y);
+		nextTile.DisplayTile();
+		if (lastMove)
+		{
+			if (nextTile.Pieces.Count > 1)
+			{
+				foreach (Piece p in nextTile.Pieces.ToList())
+				{
+					if (p != this && p.Player.Name != Player.Name)
+					{
+						p.MoveHome(b);
+						nextTile.Pieces.Remove(p);
+						nextTile.DisplayTile();
+						Console.SetCursorPosition(0, Console.WindowHeight - 1);
+						b.DrawBoard();
+						Console.WriteLine($"Spelare {Player.Name} slog ut spelare {p.Player.Name}'s pjäs {p.Id}\nTryck på valfri knapp för att forsätta");
+						Console.ReadKey();
+					}
+				}
+			}
+			if (nextTile.Id == "center")
+			{
+				Player.Pieces.Remove(this);
+				nextTile.Pieces.Remove(this);
+				b.DrawBoard();
+			}
 		}
 	}
 }
