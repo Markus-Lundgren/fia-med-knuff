@@ -2,7 +2,7 @@ using System.Text;
 
 class Board
 {
-	public int BoardTop { get; set; }
+	public static int BoardTop { get; set; }
 	public StringBuilder BoardString;
 	public Tile?[,] Tiles { get; set; } =
 	{
@@ -41,5 +41,15 @@ class Board
 			}
 			Console.WriteLine();
 		}
+	}
+
+	public static void WriteText(string message, int offset)
+	{
+		int cursor = BoardTop + 16 + offset;
+
+		Console.SetCursorPosition(0, cursor);
+		Console.Write(new string(' ', Console.WindowWidth));
+		Console.SetCursorPosition(0, cursor);
+		Console.Write(message);
 	}
 }

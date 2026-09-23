@@ -187,7 +187,9 @@ class GameState
 				MColoredText.GetColoredText(p.Color, p.Name);
 				Console.WriteLine("'s tur!");
 				Console.WriteLine();
-				p.RollDice();
+				//p.RollDice();
+				if (p.Pieces[0].InHome) p.DiceRoll = 1;
+				else p.DiceRoll = 62;
 
 				p.PlayRound(GameBoard);
 				if (p.Pieces.Count == 0)

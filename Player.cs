@@ -26,6 +26,7 @@ class Player
 		int diceRollTop = Console.CursorTop;
 		Console.WriteLine("Slå en tärning!");
 		Console.Write("Tryck valfri knapp!");
+
 		int currentCursor = Console.CursorTop;
 		Console.ReadKey(true);
 		//Console.SetCursorPosition(0, currentCursor);
