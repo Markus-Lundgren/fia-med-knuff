@@ -187,7 +187,6 @@ class GameState
 				if (p.Pieces.Count == 0) continue;
 				GameBoard.GameStarted = true;
 				ShowGame();
-				Board.BoardTop = Console.CursorTop;
 				Board.ClearTextbox();
 				Board.WriteText(p.Name, 1, 0, p.Color);
 				Board.WriteText("'s tur!", 1, p.Name.Length);
