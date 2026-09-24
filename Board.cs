@@ -52,7 +52,7 @@ class Board
 		int cursor = TextTop + offsetY;
 
 		Console.SetCursorPosition(offsetX, cursor);
-		Console.Write(new string(' ', Console.WindowWidth));
+		Console.Write(new string(' ', Console.WindowWidth - offsetX));
 		Console.SetCursorPosition(offsetX, cursor);
 		if (color == "NONE") Console.Write(message);
 		else MColoredText.GetColoredText(color, message);
