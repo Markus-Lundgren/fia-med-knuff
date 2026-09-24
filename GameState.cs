@@ -29,6 +29,7 @@ class GameState
 			Console.WriteLine();
 		}
 		Console.WriteLine();
+		Board.TextTop = Console.CursorTop;
 	}
 	public void AddPlayers(Board b)
 	{
@@ -180,13 +181,13 @@ class GameState
 	}
 	public void Play()
 	{
+		ShowGame();
 		while (Players.Count > 1)
 		{
 			foreach (Player p in Players.ToList())
 			{
 				if (p.Pieces.Count == 0) continue;
 				GameBoard.GameStarted = true;
-				ShowGame();
 				Board.ClearTextbox();
 				Board.WriteText(p.Name, 1, 0, p.Color);
 				Board.WriteText("'s tur!", 1, p.Name.Length);
