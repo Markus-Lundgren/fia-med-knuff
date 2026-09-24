@@ -33,7 +33,6 @@ class Board
 		Console.Clear();
 		Console.WriteLine("========Markus med knuff========");
 		Console.WriteLine();
-		//BoardTop = Console.CursorTop;
 
 		for (int y = 0; y < 15; y++)
 		{
