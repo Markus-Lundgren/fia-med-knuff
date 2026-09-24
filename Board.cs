@@ -45,7 +45,7 @@ class Board
 		}
 	}
 
-	public static void WriteText(string message, int offsetY, int offsetX = 0)
+	public static void WriteText(string message, int offsetY, int offsetX = 0, string color = "NONE")
 	{
 		if (lineCount < offsetY) lineCount = offsetY;
 		int cursor = BoardTop + 16 + offsetY;
@@ -53,14 +53,15 @@ class Board
 		Console.SetCursorPosition(offsetX, cursor);
 		Console.Write(new string(' ', Console.WindowWidth));
 		Console.SetCursorPosition(offsetX, cursor);
-		Console.Write(message);
+		if (color == "NONE") Console.Write(message);
+		else MColoredText.GetColoredText(color, message);
 	}
 
 	public static void ClearTextbox()
 	{
 		int cursor = BoardTop + 16 + lineCount;
 
-		for (int i = 0; i < lineCount; i++)
+		for (int i = 0; i <= lineCount; i++)
 		{
 			Console.SetCursorPosition(0, cursor - i);
 			Console.Write(new string(' ', Console.WindowWidth));
