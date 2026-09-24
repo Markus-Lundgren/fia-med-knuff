@@ -46,7 +46,7 @@ class Board
 	public static void WriteText(string message, int offsetY, int offsetX = 0, string color = "NONE")
 	{
 		if (lineCount < offsetY) lineCount = offsetY;
-		int cursor = TextTop + offsetY;
+		int cursor = BoardTop + TextTop + offsetY;
 
 		Console.SetCursorPosition(offsetX, cursor);
 		Console.Write(new string(' ', Console.WindowWidth - offsetX));
@@ -57,7 +57,7 @@ class Board
 
 	public static void ClearTextbox()
 	{
-		int cursor = BoardTop + 16 + lineCount;
+		int cursor = BoardTop + TextTop + 16 + lineCount;
 
 		for (int i = 0; i <= lineCount; i++)
 		{
