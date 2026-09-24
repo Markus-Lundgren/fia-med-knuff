@@ -4,7 +4,6 @@ class Board
 {
 	public static int BoardTop { get; set; }
 	public static int TextTop { get; set; }
-	public StringBuilder BoardString;
 	public bool GameStarted = false;
 	private static int lineCount = 0;
 	public Tile?[,] Tiles { get; set; } =
