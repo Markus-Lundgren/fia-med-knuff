@@ -1,5 +1,3 @@
-using System.Text;
-
 class Board
 {
 	public static int BoardTop { get; set; }
