@@ -5,6 +5,7 @@ class Board
 	public static int BoardTop { get; set; }
 	public StringBuilder BoardString;
 
+	public bool GameStarted = false;
 	private static int lineCount = 0;
 	public Tile?[,] Tiles { get; set; } =
 	{
@@ -27,12 +28,13 @@ class Board
 
 	public void DrawBoard()
 	{
+		if (GameStarted) return;
 		Console.Clear();
 		Console.WriteLine("\x1b[3J");
 		Console.Clear();
 		Console.WriteLine("========Markus med knuff========");
 		Console.WriteLine();
-		BoardTop = Console.CursorTop;
+		//BoardTop = Console.CursorTop;
 
 		for (int y = 0; y < 15; y++)
 		{
