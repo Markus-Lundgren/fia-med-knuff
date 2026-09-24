@@ -227,7 +227,6 @@ class Piece
 				nextTile.Pieces.Remove(this);
 				Console.SetCursorPosition(nextTile.X * 2, Board.BoardTop + nextTile.Y);
 				nextTile.DisplayTile();
-				//b.DrawBoard();
 			}
 		}
 	}

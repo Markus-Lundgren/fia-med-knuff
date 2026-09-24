@@ -73,9 +73,6 @@ class Player
 
 		foreach (Piece p in Pieces.OrderByDescending(p => p.Steps).ToList())
 		{
-			//OM StepsToGoal - Steps - DiceRoll > 0
-			//Låt ej användare välja den pjäsen
-			//OBS om 6a 
 			if ((canMove || !p.InHome) && (Piece.StepsToGoal - p.Steps - DiceRoll >= 0))
 			{
 				movable.Add(p);
