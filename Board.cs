@@ -49,7 +49,7 @@ class Board
 	public static void WriteText(string message, int offsetY, int offsetX = 0, string color = "NONE")
 	{
 		if (lineCount < offsetY) lineCount = offsetY;
-		int cursor = BoardTop + 16 + offsetY;
+		int cursor = TextTop + offsetY;
 
 		Console.SetCursorPosition(offsetX, cursor);
 		Console.Write(new string(' ', Console.WindowWidth));
