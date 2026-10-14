@@ -29,6 +29,7 @@ class GameState
 			Console.WriteLine();
 		}
 		Console.WriteLine();
+		//Board.TextTop = Console.CursorTop;
 	}
 	public void AddPlayers(Board b)
 	{
@@ -101,24 +102,25 @@ class GameState
 	{
 		foreach (Player p in Players)
 		{
+			int loop = 3;
 			ShowGame();
-			Console.WriteLine("Slå en tärning om vem som börjar!");
+			Board.WriteText("Slå en tärning om vem som börjar!", 1);
 			Console.WriteLine();
 			foreach (Player x in Players)
 			{
 				if (x.DiceRoll > 0)
 				{
-					Console.WriteLine($"{x.Name} fick: {x.DiceRoll}");
+					Board.WriteText($"{x.Name} fick: {x.DiceRoll}", loop++);
 				}
 			}
-			Console.WriteLine($"{p.Name}'s tur!");
-			p.RollDice();
+			Board.WriteText($"{p.Name}'s tur!", loop + 1);
+			p.RollDice(true);
 
 			if (p == Players.Last())
 			{
-				Console.WriteLine();
-				Console.WriteLine("Alla spelare har kastat sin tärning!");
-				Console.WriteLine("Tryck på valfri knapp för att gå vidare!");
+				Board.ClearTextbox();
+				Board.WriteText("Alla spelare har kastat sin tärning!", 1);
+				Board.WriteText("Tryck på valfri knapp för att gå vidare!", 2);
 				Console.ReadKey(true);
 			}
 		}
@@ -126,12 +128,14 @@ class GameState
 		Player[] playerArray = new Player[playerCount];
 		Players = SetOrder(Players);
 		int order = 1;
+		int line = 2;
 		ShowGame();
-		Console.WriteLine("Turordning");
+		Board.ClearTextbox();
+		Board.WriteText("Turordning", 1);
 		foreach (Player p in Players)
 		{
 			p.PityRoll = 0;
-			Console.WriteLine($"{order++}. {p.Name}");
+			Board.WriteText($"{order++}. {p.Name}", line++);
 		}
 	}
 	private List<Player> SetOrder(List<Player> orderingList)
@@ -177,28 +181,32 @@ class GameState
 	}
 	public void Play()
 	{
-		while (true)
+		ShowGame();
+		while (Players.Count > 1)
 		{
 			foreach (Player p in Players.ToList())
 			{
 				if (p.Pieces.Count == 0) continue;
-				Console.Clear();
-				ShowGame();
-				MColoredText.GetColoredText(p.Color, p.Name);
-				Console.WriteLine("'s tur!");
-				Console.WriteLine();
+				GameBoard.GameStarted = true;
+				Board.ClearTextbox();
+				Board.WriteText(p.Name, 1, 0, p.Color);
+				Board.WriteText("'s tur!", 1, p.Name.Length);
+
 				p.RollDice();
+				// Test conditions
+				// if (p.Pieces[0].InHome) p.DiceRoll = 1;
+				// else p.DiceRoll = 62;
 
 				p.PlayRound(GameBoard);
 				if (p.Pieces.Count == 0)
 				{
-					Console.WriteLine($"{p.Name} har gått ut med alla sina pjäser");
+					Board.WriteText($"{p.Name} har gått ut med alla sina pjäser", 3);
 					WinnerOrder.Add(p);
 					Players.Remove(p);
 				}
 				if (Players.Count == 1)
 				{
-					WinnerOrder.Add(p);
+					WinnerOrder.Add(Players.First());
 					PrintScore();
 				}
 			}
