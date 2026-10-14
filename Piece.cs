@@ -141,7 +141,7 @@ class Piece
 		Tile tile = b.Tiles[Coords.Y, Coords.X];
 
 		if (!tile.Pieces.Contains(this)) tile.Pieces.Add(this);
-		Console.SetCursorPosition(Coords.X * 2, b.BoardTop + Coords.Y);
+		Console.SetCursorPosition(Coords.X * 2, Board.BoardTop + Coords.Y);
 		tile.DisplayTile();
 	}
 
@@ -225,6 +225,50 @@ class Piece
 		{
 			Console.WriteLine($"ERROR! Felkoppling av tile: {curTile.Id} till {curTile.NextId}");
 			Console.ReadKey();
+<<<<<<< HEAD
+			return;
+		}
+
+		//Console.SetCursorPosition(0, b.BoardTop);
+		curTile.Pieces.Remove(this);
+		Console.SetCursorPosition(curTile.X * 2, Board.BoardTop + curTile.Y);
+		curTile?.DisplayTile();
+
+		Coords.X = nextTile.X;
+		Coords.Y = nextTile.Y;
+
+		nextTile.Pieces.Add(this);
+		Console.SetCursorPosition(nextTile.X * 2, Board.BoardTop + nextTile.Y);
+		nextTile.DisplayTile();
+
+		if (lastMove)
+		{
+			if (nextTile.Pieces.Count > 1)
+			{
+				foreach (Piece p in nextTile.Pieces.ToList())
+				{
+					if (p != this && p.Player.Name != Player.Name)
+					{
+						p.MoveHome(b);
+						nextTile.Pieces.Remove(p);
+						Console.SetCursorPosition(nextTile.X * 2, Board.BoardTop + nextTile.Y);
+						nextTile.DisplayTile();
+						Board.ClearTextbox();
+						Board.WriteText($"Spelare {Player.Name} slog ut spelare {p.Player.Name}'s pjäs {p.Id}", 1);
+						Board.WriteText($"Tryck på valfri knapp för att forsätta", 2);
+						Console.ReadKey();
+					}
+				}
+			}
+			if (nextTile.Id == "center")
+			{
+				Player.Pieces.Remove(this);
+				nextTile.Pieces.Remove(this);
+				Console.SetCursorPosition(nextTile.X * 2, Board.BoardTop + nextTile.Y);
+				nextTile.DisplayTile();
+			}
+=======
+>>>>>>> parent of ac8b034 (fix: Simplify redundat if else)
 		}
 	}
 }
