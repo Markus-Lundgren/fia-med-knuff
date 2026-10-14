@@ -184,16 +184,16 @@ class Piece
 
 		if (nextTile != null)
 		{
-			Console.SetCursorPosition(0, b.BoardTop);
+			Console.SetCursorPosition(0, Board.BoardTop);
 			curTile.Pieces.Remove(this);
-			Console.SetCursorPosition(curTile.X * 2, b.BoardTop + curTile.Y);
+			Console.SetCursorPosition(curTile.X * 2, Board.BoardTop + curTile.Y);
 			curTile?.DisplayTile();
 
 			Coords.X = nextTile.X;
 			Coords.Y = nextTile.Y;
 
 			nextTile.Pieces.Add(this);
-			Console.SetCursorPosition(nextTile.X * 2, b.BoardTop + nextTile.Y);
+			Console.SetCursorPosition(nextTile.X * 2, Board.BoardTop + nextTile.Y);
 			nextTile.DisplayTile();
 			if (lastMove)
 			{
@@ -225,7 +225,6 @@ class Piece
 		{
 			Console.WriteLine($"ERROR! Felkoppling av tile: {curTile.Id} till {curTile.NextId}");
 			Console.ReadKey();
-<<<<<<< HEAD
 			return;
 		}
 
@@ -267,8 +266,6 @@ class Piece
 				Console.SetCursorPosition(nextTile.X * 2, Board.BoardTop + nextTile.Y);
 				nextTile.DisplayTile();
 			}
-=======
->>>>>>> parent of ac8b034 (fix: Simplify redundat if else)
 		}
 	}
 }
