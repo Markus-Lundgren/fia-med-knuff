@@ -21,19 +21,26 @@ class Player
 		}
 	}
 	public int GetDiceRoll() => Random.Shared.Next(1, 7);
-	public void RollDice(bool start = false)
+	public void RollDice()
 	{
 		int diceRollTop = Console.CursorTop;
-		if (!start) Board.WriteText("Slå en tärning!", 4);
-		Board.WriteText("Tryck valfri knapp!", 5);
-		Console.ReadKey(true); ;
+		Console.WriteLine("Slå en tärning!");
+		Console.Write("Tryck valfri knapp!");
+		int currentCursor = Console.CursorTop;
+		Console.ReadKey(true);
+		//Console.SetCursorPosition(0, currentCursor);
+		Console.Write(new string(' ', Console.WindowWidth));
 
 		int diceRoll = 0;
-		Board.WriteText($"Tärning: ", 6);
+		currentCursor = Console.CursorTop;
+
 		for (int i = 0; i < 7; i++)
 		{
+			Console.SetCursorPosition(0, currentCursor);
+
 			diceRoll = GetDiceRoll();
-			Board.WriteText($"{diceRoll}", 6, 9);
+			Console.Write($"Tärning: {diceRoll}");
+
 			Thread.Sleep(250);
 		}
 		DiceRoll = diceRoll;
@@ -52,7 +59,11 @@ class Player
 			DiceRoll = 6;
 			PityRoll = 0;
 		}
-		Board.WriteText($"Du fick: {DiceRoll}", 2);
+
+		Console.SetCursorPosition(0, currentCursor);
+		Console.WriteLine($"Du fick: {DiceRoll}!                                       ");
+		//Console.SetCursorPosition(0, currentCursor);
+		//Console.Write("                                   \n");
 	}
 
 	public void PlayRound(Board b)
@@ -69,50 +80,60 @@ class Player
 		List<Piece> movable = new();
 		Dictionary<int, Piece> pieceMatch = new();
 		int pieceCount = 0;
-		int line = 3;
 
 		foreach (Piece p in Pieces.OrderByDescending(p => p.Steps).ToList())
 		{
+			//OM StepsToGoal - Steps - DiceRoll > 0
+			//Låt ej användare välja den pjäsen
+			//OBS om 6a 
 			if ((canMove || !p.InHome) && (Piece.StepsToGoal - p.Steps - DiceRoll >= 0))
 			{
 				movable.Add(p);
 				pieceMatch.Add(++pieceCount, p);
-				Board.WriteText($"{pieceCount}. Pjäs {p.Id} {(p.InHome ? "i bas" : "ute")}{((p.Steps > 0) ? $", steg {p.Steps}" : "")}", line++);
+				Console.WriteLine($"{pieceCount}. Pjäs {p.Id} {(p.InHome ? "i bas" : "ute")}{((p.Steps > 0) ? $", steg {p.Steps}" : "")}");
 				continue;
 			}
 		}
 
 		if (movable.Count == 0)
 		{
-			Board.ClearTextbox();
-			Board.WriteText("Du kan inte flytta några pjäser!", 1);
-			Board.WriteText("Tryck på valfri knapp för nästa spelare!", 2);
+			Console.WriteLine("Du kan inte flytta några pjäser!");
+			Console.WriteLine("Tryck på valfri knapp för nästa spelare!");
 			Console.ReadKey();
 			return;
 		}
+
+		Console.WriteLine();
+		int cursorTop = Console.CursorTop;
 		int choice = 0;
 
 		Piece temp = movable[0];
 
+		//NÄR tillgänglig pjäs finns
+		//Hämta val av pjäs
+
 		while (movable.Count > 1)
 		{
 			choice = MInput.GetInputAsInt("Välj en pjäs: ");
-			line++;
+			Console.WriteLine();
+			Console.SetCursorPosition(0, cursorTop);
 
 			if (!pieceMatch.ContainsKey(choice))
 			{
-				Board.WriteText("Ej ett giltig val! försök igen", line + 1);
+				Console.SetCursorPosition(0, Console.CursorTop - 1);
+				Console.Write("Ej ett giltig val! försök igen");
+				Console.WriteLine();
 				continue;
 			}
-			Board.WriteText("", ++line);
 
 			temp = movable[movable.IndexOf(pieceMatch[choice])];
 			var tmp = Pieces.Where(p => p.Steps == temp.Steps + DiceRoll);
 
 			if (tmp.Count() > 0 && !temp.InHome)
 			{
-				Board.WriteText("Du kan inte flytta denna pjäs", line + 1);
-				Board.WriteText("Tryck på valfri knapp för att gå vidare", line + 2);
+				Console.WriteLine();
+				Console.WriteLine("Du kan inte flytta denna pjäs");
+				Console.WriteLine("Tryck på valfri knapp för att gå vidare");
 				Console.ReadKey();
 				continue;
 			}

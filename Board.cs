@@ -1,9 +1,9 @@
+using System.Text;
+
 class Board
 {
-	public static int BoardTop { get; set; }
-	public static int TextTop { get; set; }
-	public bool GameStarted = false;
-	private static int lineCount = 0;
+	public int BoardTop { get; set; }
+	public StringBuilder BoardString;
 	public Tile?[,] Tiles { get; set; } =
 	{
 		{ new(0,0,"homeRed","","darkred"), new(0,1,"homeRed","","darkred"), new(0,2,"homeRed","","darkred"), new(0,3,"homeRed","","darkred"), null, null, new(0,6,"tile55","tile56"), new(0,7,"tile56","enterBlue", "darkblue", "blueGoal"), new(0,8,"enterBlue","tile2","blue"), null, null, new(0,11,"homeBlue","","darkblue"), new(0,12,"homeBlue","","darkblue"), new(0,13,"homeBlue","","darkblue"), new(0,14,"homeBlue","","darkblue") },
@@ -25,7 +25,6 @@ class Board
 
 	public void DrawBoard()
 	{
-		if (GameStarted) return;
 		Console.Clear();
 		Console.WriteLine("\x1b[3J");
 		Console.Clear();
@@ -42,28 +41,5 @@ class Board
 			}
 			Console.WriteLine();
 		}
-		TextTop = BoardTop + 15 + 1;
-	}
-
-	public static void WriteText(string message, int offsetY, int offsetX = 0, string color = "NONE")
-	{
-		if (lineCount < offsetY) lineCount = offsetY;
-		int cursor = TextTop + offsetY;
-
-		Console.SetCursorPosition(offsetX, cursor);
-		Console.Write(new string(' ', Console.WindowWidth - offsetX));
-		Console.SetCursorPosition(offsetX, cursor);
-		if (color == "NONE") Console.Write(message);
-		else MColoredText.GetColoredText(color, message);
-	}
-
-	public static void ClearTextbox()
-	{
-		for (int i = 0; i <= lineCount + 5; i++)
-		{
-			Console.SetCursorPosition(0, TextTop - i);
-			Console.Write(new string(' ', Console.WindowWidth - 1));
-		}
-		lineCount = 0;
 	}
 }

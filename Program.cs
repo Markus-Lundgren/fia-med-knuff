@@ -4,8 +4,6 @@
 	{
 
 		Console.Clear();
-		//Console.SetWindowSize(80, 30);
-		Console.SetBufferSize(80, 30);
 
 		GameState fia = new();
 		Console.CursorVisible = false;
