@@ -29,7 +29,7 @@ class GameState
 			Console.WriteLine();
 		}
 		Console.WriteLine();
-		Board.TextTop = Console.CursorTop;
+		//Board.TextTop = Console.CursorTop;
 	}
 	public void AddPlayers(Board b)
 	{

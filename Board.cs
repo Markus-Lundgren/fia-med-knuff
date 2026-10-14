@@ -31,6 +31,7 @@ class Board
 		Console.Clear();
 		Console.WriteLine("========Markus med knuff========");
 		Console.WriteLine();
+		BoardTop = Console.CursorTop;
 
 		for (int y = 0; y < 15; y++)
 		{
@@ -41,12 +42,13 @@ class Board
 			}
 			Console.WriteLine();
 		}
+		TextTop = BoardTop + 15 + 1;
 	}
 
 	public static void WriteText(string message, int offsetY, int offsetX = 0, string color = "NONE")
 	{
 		if (lineCount < offsetY) lineCount = offsetY;
-		int cursor = BoardTop + TextTop + offsetY;
+		int cursor = TextTop + offsetY;
 
 		Console.SetCursorPosition(offsetX, cursor);
 		Console.Write(new string(' ', Console.WindowWidth - offsetX));
@@ -57,14 +59,11 @@ class Board
 
 	public static void ClearTextbox()
 	{
-		int cursor = BoardTop + TextTop + 16 + lineCount;
-
-		for (int i = 0; i <= lineCount; i++)
+		for (int i = 0; i <= lineCount + 5; i++)
 		{
-			Console.SetCursorPosition(0, cursor - i);
-			Console.Write(new string(' ', Console.WindowWidth));
+			Console.SetCursorPosition(0, TextTop - i);
+			Console.Write(new string(' ', Console.WindowWidth - 1));
 		}
-
 		lineCount = 0;
 	}
 }
