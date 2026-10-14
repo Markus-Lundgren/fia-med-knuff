@@ -2,7 +2,9 @@
 {
 	static void Main()
 	{
+
 		Console.Clear();
+
 		GameState fia = new();
 		Console.CursorVisible = false;
 

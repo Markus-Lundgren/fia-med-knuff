@@ -141,7 +141,7 @@ class Piece
 		Tile tile = b.Tiles[Coords.Y, Coords.X];
 
 		if (!tile.Pieces.Contains(this)) tile.Pieces.Add(this);
-		Console.SetCursorPosition(Coords.X * 2, Board.BoardTop + Coords.Y);
+		Console.SetCursorPosition(Coords.X * 2, b.BoardTop + Coords.Y);
 		tile.DisplayTile();
 	}
 
@@ -190,18 +190,17 @@ class Piece
 			return;
 		}
 
-		//Console.SetCursorPosition(0, b.BoardTop);
+		Console.SetCursorPosition(0, b.BoardTop);
 		curTile.Pieces.Remove(this);
-		Console.SetCursorPosition(curTile.X * 2, Board.BoardTop + curTile.Y);
+		Console.SetCursorPosition(curTile.X * 2, b.BoardTop + curTile.Y);
 		curTile?.DisplayTile();
 
 		Coords.X = nextTile.X;
 		Coords.Y = nextTile.Y;
 
 		nextTile.Pieces.Add(this);
-		Console.SetCursorPosition(nextTile.X * 2, Board.BoardTop + nextTile.Y);
+		Console.SetCursorPosition(nextTile.X * 2, b.BoardTop + nextTile.Y);
 		nextTile.DisplayTile();
-
 		if (lastMove)
 		{
 			if (nextTile.Pieces.Count > 1)
@@ -212,11 +211,10 @@ class Piece
 					{
 						p.MoveHome(b);
 						nextTile.Pieces.Remove(p);
-						Console.SetCursorPosition(nextTile.X * 2, Board.BoardTop + nextTile.Y);
 						nextTile.DisplayTile();
-						Board.ClearTextbox();
-						Board.WriteText($"Spelare {Player.Name} slog ut spelare {p.Player.Name}'s pjäs {p.Id}", 1);
-						Board.WriteText($"Tryck på valfri knapp för att forsätta", 2);
+						Console.SetCursorPosition(0, Console.WindowHeight - 1);
+						b.DrawBoard();
+						Console.WriteLine($"Spelare {Player.Name} slog ut spelare {p.Player.Name}'s pjäs {p.Id}\nTryck på valfri knapp för att forsätta");
 						Console.ReadKey();
 					}
 				}
@@ -225,9 +223,7 @@ class Piece
 			{
 				Player.Pieces.Remove(this);
 				nextTile.Pieces.Remove(this);
-				Console.SetCursorPosition(nextTile.X * 2, Board.BoardTop + nextTile.Y);
-				nextTile.DisplayTile();
-				//b.DrawBoard();
+				b.DrawBoard();
 			}
 		}
 	}
