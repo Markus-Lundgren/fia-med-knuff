@@ -6,10 +6,7 @@ class Player
 	public string? Color { get; set; }
 	public List<Piece> Pieces;
 	public int PityRoll = 0;
-	public Player()
-	{
-		Pieces = new();
-	}
+	public Player() => Pieces = new();
 	public void AddPieces(string color)
 	{
 		for (int i = 0; i < 4; i++)

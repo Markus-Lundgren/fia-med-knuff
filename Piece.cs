@@ -85,21 +85,14 @@ class Piece
 			//Kolla om du är på en goal tile
 			//Välj en path tile som nästa
 
-			switch (curTile.SpecialInfo)
+			nextCompare = curTile.SpecialInfo switch
 			{
-				case "redGoal":
-					if (Color == "red") nextCompare = "darkredPath1";
-					break;
-				case "blueGoal":
-					if (Color == "blue") nextCompare = "darkbluePath1";
-					break;
-				case "greenGoal":
-					if (Color == "green") nextCompare = "darkgreenPath1";
-					break;
-				case "yellowGoal":
-					if (Color == "yellow") nextCompare = "darkyellowPath1";
-					break;
-			}
+				"redGoal" => Color == "red" ? "darkredPath1" : nextCompare,
+				"blueGoal" => Color == "blue" ? "darkbluePath1" : nextCompare,
+				"greenGoal" => Color == "green" ? "darkgreenPath1" : nextCompare,
+				"yellowGoal" => Color == "yellow" ? "darkyellowPath1" : nextCompare
+			};
+
 			if (t != null && t.Id == nextCompare)
 			{
 				nextTile = t;
