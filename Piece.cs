@@ -9,16 +9,8 @@ class Piece
 	public static int StepsToGoal = 63;
 	public Player Player;
 	public Coords Coords;
-	public Piece(int id, Player player)
-	{
-		Id = id;
-		Player = player;
-	}
-
-	public void SetPosition(int x, int y)
-	{
-		Coords = new Coords(x, y);
-	}
+	public Piece(int id, Player player) => (Id, Player) = (id, player);
+	public void SetPosition(int x, int y) => Coords = new Coords(x, y);
 
 	public void DrawPiece(Board b)
 	{
@@ -45,97 +37,30 @@ class Piece
 		Coords tmp = new();
 		Steps = 0;
 		StepsLeft = 63;
-		switch (Color?.ToLower())
+		var (y, x) = (Color.ToLower(), Id) switch
 		{
-			case "red":
-				switch (Id)
-				{
-					case 1:
-						tmp.Y = 1;
-						tmp.X = 1;
-						break;
-					case 2:
-						tmp.Y = 1;
-						tmp.X = 2;
-						break;
-					case 3:
-						tmp.Y = 2;
-						tmp.X = 1;
-						break;
-					case 4:
-						tmp.Y = 2;
-						tmp.X = 2;
-						break;
-				}
-				break;
+			("red", 1) => (1, 1),
+			("red", 2) => (1, 2),
+			("red", 3) => (2, 1),
+			("red", 4) => (2, 2),
 
-			case "blue":
-				switch (Id)
-				{
-					case 1:
-						tmp.Y = 1;
-						tmp.X = 12;
-						break;
-					case 2:
-						tmp.Y = 1;
-						tmp.X = 13;
-						break;
-					case 3:
-						tmp.Y = 2;
-						tmp.X = 12;
-						break;
-					case 4:
-						tmp.Y = 2;
-						tmp.X = 13;
-						break;
-				}
-				break;
+			("blue", 1) => (1, 12),
+			("blue", 2) => (1, 13),
+			("blue", 3) => (2, 12),
+			("blue", 4) => (2, 13),
 
-			case "green":
-				switch (Id)
-				{
-					case 1:
-						tmp.Y = 12;
-						tmp.X = 12;
-						break;
-					case 2:
-						tmp.Y = 12;
-						tmp.X = 13;
-						break;
-					case 3:
-						tmp.Y = 13;
-						tmp.X = 12;
-						break;
-					case 4:
-						tmp.Y = 13;
-						tmp.X = 13;
-						break;
-				}
-				break;
+			("green", 1) => (12, 12),
+			("green", 2) => (12, 13),
+			("green", 3) => (13, 12),
+			("green", 4) => (13, 13),
 
-			case "yellow":
-				switch (Id)
-				{
-					case 1:
-						tmp.Y = 12;
-						tmp.X = 1;
-						break;
-					case 2:
-						tmp.Y = 12;
-						tmp.X = 2;
-						break;
-					case 3:
-						tmp.Y = 13;
-						tmp.X = 1;
-						break;
-					case 4:
-						tmp.Y = 13;
-						tmp.X = 2;
-						break;
-				}
-				break;
-		}
+			("yellow", 1) => (12, 1),
+			("yellow", 2) => (12, 2),
+			("yellow", 3) => (13, 1),
+			("yellow", 4) => (13, 2)
+		};
 
+		(tmp.Y, tmp.X) = (y, x);
 		Coords = tmp;
 
 		Tile tile = b.Tiles[Coords.Y, Coords.X];
