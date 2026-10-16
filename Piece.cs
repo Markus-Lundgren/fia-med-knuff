@@ -1,6 +1,6 @@
 class Piece
 {
-	public string? Color { get; set; }
+	public string? Color { get; private set; }
 	public int Id { get; set; }
 	public string PieceDisplay = "■ ";
 	public bool InHome = true;

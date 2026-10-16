@@ -6,13 +6,12 @@ class Player
 	public string? Color { get; set; }
 	public List<Piece> Pieces;
 	private int _PityRoll = 0;
-	public Player() => Pieces = new();
+	public Player(string name, int id) => (Name, Id, Pieces) = (name, id, new());
 	public void AddPieces(string color)
 	{
 		for (int i = 1; i <= 4; i++)
 		{
 			Pieces.Add(new Piece(i, this, color));
-			Console.WriteLine($"Added piece {i}");
 		}
 	}
 	public int GetDiceRoll() => Random.Shared.Next(1, 7);

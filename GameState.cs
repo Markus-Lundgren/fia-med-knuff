@@ -37,10 +37,8 @@ class GameState
 
 		for (int i = 0; i < PlayerCount; i++)
 		{
-			Player p = new();
 			ShowGame();
-			p.Id = i + 1;
-			p.Name = MInput.GetInput($"Spelare {p.Id}, välj ett namn: ");
+			Player p = new(MInput.GetInput($"Spelare {i + 1}, välj ett namn: "), i + 1);
 
 			var tmp = Players.Where(pl => pl.Name == p.Name);
 			while (tmp.Count() > 0)
