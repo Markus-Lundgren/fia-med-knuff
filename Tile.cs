@@ -8,15 +8,8 @@ class Tile
 	public string SpecialInfo = "false";
 	public List<Piece> Pieces = new();
 
-	public Tile(int y, int x, string id, string nextId, string color = "NONE", string special = "false")
-	{
-		X = x;
-		Y = y;
-		Id = id;
-		NextId = nextId;
-		Color = color;
-		SpecialInfo = special;
-	}
+	public Tile(int y, int x, string id, string nextId, string color = "NONE", string special = "false") =>
+	(Y, X, Id, NextId, Color, SpecialInfo) = (y, x, id, nextId, color, special);
 
 	public void DisplayTile()
 	{
