@@ -9,7 +9,7 @@ class Piece
 	public static int StepsToGoal = 63;
 	public Player Player;
 	public Coords Coords;
-	public Piece(int id, Player player) => (Id, Player) = (id, player);
+	public Piece(int id, Player player, string color) => (Id, Player, Color) = (id, player, color);
 	public void SetPosition(int x, int y) => Coords = new Coords(x, y);
 
 	public void DrawPiece(Board b)

@@ -11,7 +11,7 @@ class Player
 	{
 		for (int i = 1; i <= 4; i++)
 		{
-			Pieces.Add(new Piece(i, this) { Color = color });
+			Pieces.Add(new Piece(i, this, color));
 			Console.WriteLine($"Added piece {i}");
 		}
 	}
