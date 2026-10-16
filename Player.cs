@@ -38,16 +38,16 @@ class Player
 			Thread.Sleep(250);
 		}
 		DiceRoll = diceRoll;
-		bool homeCheck = false;
+		bool anyPieceIsOut = false;
 		foreach (Piece p in Pieces)
 		{
 			if (!p.InHome)
 			{
-				homeCheck = true;
+				anyPieceIsOut = true;
 				break;
 			}
 		}
-		if (!homeCheck) _PityRoll++;
+		if (!anyPieceIsOut) _PityRoll++;
 		if (_PityRoll == 3)
 		{
 			DiceRoll = 6;
