@@ -130,7 +130,6 @@ class GameState
 		Console.WriteLine("Turordning");
 		foreach (Player p in Players)
 		{
-			p.PityRoll = 0;
 			Console.WriteLine($"{order++}. {p.Name}");
 		}
 	}

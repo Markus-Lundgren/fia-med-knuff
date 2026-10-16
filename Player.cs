@@ -5,7 +5,7 @@ class Player
 	public int DiceRoll = 0;
 	public string? Color { get; set; }
 	public List<Piece> Pieces;
-	public int PityRoll = 0;
+	private int _PityRoll = 0;
 	public Player() => Pieces = new();
 	public void AddPieces(string color)
 	{
@@ -50,11 +50,11 @@ class Player
 				break;
 			}
 		}
-		if (!homeCheck) PityRoll++;
-		if (PityRoll == 3)
+		if (!homeCheck) _PityRoll++;
+		if (_PityRoll == 3)
 		{
 			DiceRoll = 6;
-			PityRoll = 0;
+			_PityRoll = 0;
 		}
 
 		Console.SetCursorPosition(0, currentCursor);
