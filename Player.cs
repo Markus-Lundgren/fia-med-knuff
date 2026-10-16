@@ -9,12 +9,10 @@ class Player
 	public Player() => Pieces = new();
 	public void AddPieces(string color)
 	{
-		for (int i = 0; i < 4; i++)
+		for (int i = 1; i <= 4; i++)
 		{
-			Piece p = new Piece(i + 1, this);
-			p.Color = color;
-			Pieces.Add(p);
-			Console.WriteLine("Added piece " + (i + 1));
+			Pieces.Add(new Piece(i, this) { Color = color });
+			Console.WriteLine($"Added piece {i}");
 		}
 	}
 	public int GetDiceRoll() => Random.Shared.Next(1, 7);
