@@ -48,7 +48,7 @@ class Player
 			}
 		}
 		if (!anyPieceIsOut) _PityRoll++;
-		if (_PityRoll == 3)
+		if (_PityRoll == 4)
 		{
 			DiceRoll = 6;
 			_PityRoll = 0;
