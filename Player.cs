@@ -1,12 +1,12 @@
 class Player
 {
 	public string? Name { get; set; }
-	public int Id { get; set; }
+	public int Id { get; private set; }
 	public int DiceRoll = 0;
 	public string? Color { get; set; }
-	public List<Piece> Pieces;
+	public List<Piece> Pieces = new();
 	private int _PityRoll = 0;
-	public Player(string name, int id) => (Name, Id, Pieces) = (name, id, new());
+	public Player(string name, int id) => (Name, Id) = (name, id);
 	public void AddPieces(string color)
 	{
 		for (int i = 1; i <= 4; i++)
