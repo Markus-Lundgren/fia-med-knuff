@@ -18,7 +18,6 @@ class Tile
 		SpecialInfo = special;
 	}
 
-	public Tile() { }
 	public void DisplayTile()
 	{
 		if (Pieces.Count > 0)
